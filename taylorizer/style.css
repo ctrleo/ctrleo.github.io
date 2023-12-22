@@ -1,0 +1,30 @@
+* {
+    font-family:  sans-serif;
+    margin: 0px;
+}
+
+
+#main {
+    text-align: center;
+    color: white;
+    background-color: #ff69b4;
+    padding-top: 200px;
+    padding-bottom: 50px;
+}
+
+#main h1 {
+    font-size: 15vw;
+}
+
+#caption {
+    display: block;
+    padding-bottom: 50px;
+}
+
+#sign-in {
+    background-color: lime;
+    color: black;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 25px;
+}
