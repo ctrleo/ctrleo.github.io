@@ -1,3 +1,11 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+}
+
+
+#main {
+    text-align: center;
+    color: white;
+    background-color: #ff69b4;
 }
