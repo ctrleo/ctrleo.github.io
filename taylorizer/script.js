@@ -1,7 +1,6 @@
-var callback = "http://mastodon-tender-leopard.ngrok-free.app";
+var callback = "http://mastodon-tender-leopard.ngrok-free.app/callback";
 var queries = window.location.search;
 var params = new URLSearchParams(queries);
 if (params.has('code') && params.has('state') {
-    console.log("placeholder lmao");
-    // ill come back to this
+    keys = fetch(callback + '?code=' params.get('code') + '&state=' + params.get('state');
 };
