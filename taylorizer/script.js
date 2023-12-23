@@ -1,4 +1,4 @@
-var backend = "http://mastodon-tender-leopard.ngrok-free.app";
+var backend = "https://mastodon-tender-leopard.ngrok-free.app";
 var queries = window.location.search;
 var params = new URLSearchParams(queries);
 
