@@ -8,7 +8,7 @@ async function get_token(URL) {
 };
 
 if (params.has('code') && params.has('state')) {
-    spotify_token = get_token(backend + '/callback' + '?code=' + params.get('code') + '&state=' + params.get('state'))
+    spotify_token = get_token(backend + '/callback' + '?code=' + params.get('code') + '&state=' + params.get('state'));
     // get rid of this console.log in production model pls
     console.log()
     if (spotify_token.status === 200) {
