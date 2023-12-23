@@ -1,10 +1,7 @@
-var callback = new URL("http://127.0.0.1", '/callback');
-callback.port = 8000;
-var queryString = window.location.search;
-var urlParams = new URLSearchParams(queryString);
-if (urlParams.has('code') && urlParams.has('state')) {
-    var keys = await fetch(callback, {
-        code: urlParams.get('code'),
-        state: urlParams.get('state')
-    })
+var callback = "http://mastodon-tender-leopard.ngrok-free.app";
+var queries = window.location.search;
+var params = new URLSearchParams(queries);
+if (params.has('code') && params.has('state') {
+    console.log("placeholder lmao");
+    // ill come back to this
 };
