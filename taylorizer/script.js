@@ -12,10 +12,10 @@ if (params.has('code') && params.has('state')) {
     // get rid of this console.log in production model pls
     console.log()
     if (spotify_token.status === 200) {
-        console.log(spotify_token.statusText);
+        console.log(spotify_token.text());
         // will come back to this later
     } else {
-        console.log(spotify_token.statusText);
+        console.log(spotify_token.text());
         // will also come back to this later
     };
 };
