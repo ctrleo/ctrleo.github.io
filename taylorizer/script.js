@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 var backend = "https://mastodon-tender-leopard.ngrok-free.app";
 var queries = window.location.search;
 var params = new URLSearchParams(queries);
