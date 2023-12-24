@@ -1,15 +1,11 @@
-var backend = "https://mastodon-tender-leopard.ngrok-free.app";
-var queries = window.location.search;
-var params = new URLSearchParams(queries);
-// url = backend + '/callback' + '?code=' + params.get('code') + '&state=' + params.get('state')
+var backend = "http://127.0.0.1:3000";
+var params = new URLSearchParams(window.location.search);
 
 
-if (params.has('code') && params.has('state')) {
-    spotify_token = fetch(backend + '/callback' + '?code=' + params.get('code') + '&state=' + params.get('state'));
-    // add loading icon here
-    console.log("loading");
-    spotify_token.then(
-        function() {console.log("got token!!!")},
-        function() {console.log("got token, error returned :(")}
-    )
+if (params.has("code")) {
+    fetch(backend + "/callback?code=" + params.get("code"))
+    .then(function(rsp) {if (rsp.ok) {
+        spotify_tokens = rsp.json()
+        .then(function() {window.localStorage.setItem("auth_token", JSON.stringify(spotify_tokens))})
+    }})
 };
