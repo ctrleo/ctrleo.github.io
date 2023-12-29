@@ -1,4 +1,4 @@
-var backend = "http://127.0.0.1:3000";
+var backend = "https://138.68.116.108";
 var params = new URLSearchParams(window.location.search);
 
 if (params.has("code")) {
