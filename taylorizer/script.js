@@ -15,5 +15,5 @@ if (params.has("code")) {
 
 if (params.has("auth_error")) {
     document.getElementById("caption").style.color = "rgb(255,0,0)";
-    document.getElementById("caption").innerText = "Auth error occured :/ pls try again"
+    document.getElementById("caption").innerHTML = "Auth error occured :/ pls try again";
 }
