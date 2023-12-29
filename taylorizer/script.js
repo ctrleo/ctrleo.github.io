@@ -1,3 +1,5 @@
+import { redirect } from "express/lib/response";
+
 var backend = "https://138.68.116.108";
 var params = new URLSearchParams(window.location.search);
 
@@ -11,3 +13,7 @@ if (params.has("code")) {
         .finally(function() {localStorage.setItem("access_token", token)});
 };
 
+if (params.has("auth_error")) {
+    document.getElementById("caption").style.color = "red";
+    document.getElementById("caption").innerText = "Auth error occured :/ please try again"
+}
