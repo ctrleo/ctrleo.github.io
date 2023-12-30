@@ -4,6 +4,7 @@ var origin = window.location.origin + "/taylorizer";
 var auth_token = sessionStorage.getItem("access_token");
 
 async function main() {
+    var select = document.getElementById('playlists_dropdown');
     if (params.has("auth_error")) {
         document.getElementById("caption").style.color = "red";
         document.getElementById("caption").innerText = "Auth error occured :/ please try again!"
@@ -30,13 +31,27 @@ async function main() {
             }
         });
         var playlists = (await getplaylists.json()).items;
-        var titles = [];
-        for (let i = 0 ; i < playlists.length; i++) {
+        for (let i = 0; i < playlists.length; i++) {
             let playlist_name = playlists[i].name;
             let option = new Option(playlist_name, playlist_name);
-            let select = document.getElementById('playlists_dropdown');
             select.add(option);
         };
-        document.getElementById('playlists_dropdown').style.display = "inline-block";
+        select.style.display = "inline-block";
+    };
+};
+
+async function getplaylist() {
+    let select = document.getElementById('playlists_dropdown');
+    var title = select.value;
+    for (let i = 0; i < playlists.length; i++) {
+        let playlist_name = playlists[i].name;
+        if (playlist_name === title) {
+            var id = playlists[i].id;
+            var target = await fetch("https://api.spotify.com/v1/playlists/" + id)
+            var playlist = await target.json();
+            break
+        } else {
+            // idk continue
+        };
     };
 };
