@@ -21,6 +21,10 @@
     padding-bottom: 50px;
 }
 
+#playlists_dropdown {
+    display: none;
+}
+
 #sign-in {
     background-color: lime;
     color: black;
