@@ -22,15 +22,18 @@ async function main() {
             });
     };
     if (auth_token !== null) {
-        console.log("testing access token")
-        // throw around awaits and pray
-        var me = await fetch("https://api.spotify.com/v1/me", {
+        document.getElementById("sign-in").style.display = "none";
+        var getplaylists = await fetch("https://api.spotify.com/v1/me/playlists", {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + auth_token
             }
-        })
-        var data = await me.json();
-        document.getElementById("caption").innerText = "Hello " + data.display_name;
+        });
+        var playlists = (await getplaylists.json()).items;
+        var titles = [];
+        for (let i = 0 ; i < playlists.length; i++) {
+            var playlist_name = playlists[i].name;
+            titles.push(playlist_name);
+        };
     };
 };
