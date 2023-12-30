@@ -32,8 +32,11 @@ async function main() {
         var playlists = (await getplaylists.json()).items;
         var titles = [];
         for (let i = 0 ; i < playlists.length; i++) {
-            var playlist_name = playlists[i].name;
-            titles.push(playlist_name);
+            let playlist_name = playlists[i].name;
+            let option = new Option(playlist_name, playlist_name);
+            let select = document.getElementById('playlists_dropdown');
+            select.add(option);
         };
+        document.getElementById('playlists_dropdown').style.display = "inline-block";
     };
 };
