@@ -1,6 +1,6 @@
 var backend = "https://138.68.116.108";
 var params = new URLSearchParams(window.location.search);
-var origin = window.location.origin
+var origin = window.location.origin;
 
 function checkparams() {
     if (params.has("auth_error")) {
@@ -15,6 +15,6 @@ function checkparams() {
             .then(response => response.text())
             .then(text => {token = text})
             .catch(function() {window.location.replace(origin + "?auth_error=true")})
-            .finally(function() {localStorage.setItem("access_token", token)});
+            .finally(function() {sessionStorage.setItem("access_token", token)});
     };
 };
