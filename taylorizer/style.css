@@ -25,6 +25,16 @@
     display: none;
 }
 
+#stolen {
+    display: none;
+    color: aquamarine;
+}
+
+#tv {
+    display: none;
+    color: greenyellow;
+}
+
 #sign-in {
     background-color: lime;
     color: black;

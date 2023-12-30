@@ -2,6 +2,7 @@ var backend = "https://138.68.116.108";
 var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
 var auth_token = sessionStorage.getItem("access_token");
+var playlists;
 
 async function main() {
     var select = document.getElementById('playlists_dropdown');
@@ -30,7 +31,7 @@ async function main() {
                 Authorization: 'Bearer ' + auth_token
             }
         });
-        var playlists = (await getplaylists.json()).items;
+        playlists = (await getplaylists.json()).items;
         for (let i = 0; i < playlists.length; i++) {
             let playlist_name = playlists[i].name;
             let option = new Option(playlist_name, playlist_name);
@@ -47,11 +48,32 @@ async function getplaylist() {
         let playlist_name = playlists[i].name;
         if (playlist_name === title) {
             var id = playlists[i].id;
-            var target = await fetch("https://api.spotify.com/v1/playlists/" + id)
+            var target = await fetch("https://api.spotify.com/v1/playlists/" + id, {
+                method: 'GET',
+                headers: {
+                    Authorization: 'Bearer ' + auth_token
+                }
+            })
             var playlist = await target.json();
             break
         } else {
             // idk continue
         };
     };
+    var tracks = playlist.tracks.items;
+    for (let t = 0; t < tracks.length; t++) {
+        let song = tracks[t].track;
+        let release = new Date(song.album.release_date);
+        if (song.artists[0].name === "Taylor Swift") {
+            if (release < new Date(2019)) {
+                let song_title = song.name;
+                let taylors = song.name + " (Taylor's Version)";
+            } else {
+                break
+            }
+        } else {
+            break
+        }
+    }
+
 };
