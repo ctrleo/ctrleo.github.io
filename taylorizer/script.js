@@ -2,7 +2,7 @@ var backend = "https://138.68.116.108";
 var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
 var auth_token = sessionStorage.getItem("access_token");
-var playlists;
+var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Speak Now (Deluxe Package)", "Speak Now", "Speak Now (Deluxe Package)", "Red (Deluxe Edition)", "1989", "1989 (Deluxe)"];
 
 async function main() {
     var select = document.getElementById('playlists_dropdown');
@@ -31,10 +31,11 @@ async function main() {
                 Authorization: 'Bearer ' + auth_token
             }
         });
-        playlists = (await getplaylists.json()).items;
+        var playlists = (await getplaylists.json()).items;
         for (let i = 0; i < playlists.length; i++) {
             let playlist_name = playlists[i].name;
-            let option = new Option(playlist_name, playlist_name);
+            let playlist_id = playlists[i].id;
+            let option = new Option(playlist_name, playlist_id);
             select.add(option);
         };
         select.style.display = "inline-block";
@@ -42,38 +43,35 @@ async function main() {
 };
 
 async function getplaylist() {
-    let select = document.getElementById('playlists_dropdown');
-    var title = select.value;
-    for (let i = 0; i < playlists.length; i++) {
-        let playlist_name = playlists[i].name;
-        if (playlist_name === title) {
-            var id = playlists[i].id;
-            var target = await fetch("https://api.spotify.com/v1/playlists/" + id, {
+    var select = document.getElementById('playlists_dropdown');
+    var id = select.value;
+    let playlist_tracks = await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks", {
+        method: 'GET',
+        headers: {
+            Authorization: 'Bearer ' + auth_token
+        }
+    });
+    let jsontracks = await playlist_tracks.json();
+    var tracks = jsontracks.items;
+    for (let t = 0; t < tracks.length; t++) {
+        let track = tracks[t].track;
+        console.log(track.name);
+        let taylors = track.name + " (Taylor\'s Version)";
+        if (stolen.includes(track.album.name)) {
+            let spotifysearch = encodeURI("track:" + taylors + " artist:Taylor Swift");
+            let searching = await fetch("https://api.spotify.com/v1/search?q=" + spotifysearch + "&type=track&limit=1", {
                 method: 'GET',
                 headers: {
                     Authorization: 'Bearer ' + auth_token
                 }
-            })
-            var playlist = await target.json();
-            break
-        } else {
-            // idk continue
+            });
+            let parsed_search = await searching.json();
+            let parsed_track = parsed_search.tracks.items[0];
+            if (parsed_track.name == taylors) {
+                console.log(taylors + " found!");
+            } else {
+                console.log("Taylor\'s Version not found for " + track.name);
+            }
         };
     };
-    var tracks = playlist.tracks.items;
-    for (let t = 0; t < tracks.length; t++) {
-        let song = tracks[t].track;
-        let release = new Date(song.album.release_date);
-        if (song.artists[0].name === "Taylor Swift") {
-            if (release < new Date(2019)) {
-                let song_title = song.name;
-                let taylors = song.name + " (Taylor's Version)";
-            } else {
-                break
-            }
-        } else {
-            break
-        }
-    }
-
 };
