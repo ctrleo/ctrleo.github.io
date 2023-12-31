@@ -18,7 +18,8 @@
 
 #caption {
     display: block;
-    padding-bottom: 50px;
+    padding-bottom: 35px;
+    font-size: 20px;
 }
 
 #playlists_dropdown {
@@ -29,6 +30,9 @@
 #stolen {
     display: none;
     color: aqua;
+    font-size: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #tv {
@@ -65,4 +69,17 @@
 
 #taylorize {
     display: none;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#taylorizing {
+    text-align: center;
+    display: none;
+    border: 16px solid whitesmoke;
+    border-top: 16px solid red;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
 }

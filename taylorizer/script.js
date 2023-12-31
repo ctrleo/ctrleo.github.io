@@ -3,9 +3,6 @@ var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
 var auth_token = sessionStorage.getItem("access_token");
 var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe)", "1989 (Big Machine Radio Release Special)"];
-var stolen_songs = [];
-var taylors_versions = [];
-
 
 async function main() {
     var select = document.getElementById('playlists_dropdown');
@@ -26,6 +23,10 @@ async function main() {
                 window.location.replace(origin);
             });
     };
+    if (params.has("success")) {
+        document.getElementById("caption").style.color = "limegreen";
+        document.getElementById("caption").innerText = "DONE!"
+    }
     if (auth_token !== null) {
         document.getElementById("sign-in").style.display = "none";
         var getplaylists = await fetch("https://api.spotify.com/v1/me/playlists", {
@@ -46,8 +47,8 @@ async function main() {
 };
 
 async function getplaylist() {
-    stolen_songs = [];
-    taylors_versions = [];
+    var stolen_songs = [];
+    var taylors_versions = [];
     var select = document.getElementById('playlists_dropdown');
     var id = select.value;
     let playlist_tracks = await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks", {
@@ -60,7 +61,7 @@ async function getplaylist() {
     var tracks = jsontracks.items;
     for (let t = 0; t < tracks.length; t++) {
         let track = tracks[t].track;
-        let taylors = track.name + " (Taylor\'s Version)";
+        let taylors = track.name + " (Taylor's Version)";
         if (stolen.includes(track.album.name)) {
             let spotifysearch = encodeURI("track:" + taylors + " artist:Taylor Swift");
             let searching = await fetch("https://api.spotify.com/v1/search?q=" + spotifysearch + "&type=track&limit=1", {
@@ -71,14 +72,58 @@ async function getplaylist() {
             });
             let parsed_search = await searching.json();
             let parsed_track = parsed_search.tracks.items[0];
-            if (parsed_track.name == taylors) {
+            if (parsed_track.name.includes(track.name)) {
                 stolen_songs.push(track.uri);
                 taylors_versions.push(parsed_track.uri)
             } else {
-                console.log("Taylor\'s Version not found for " + track.name);
+                console.log("Taylor's Version not found for " + track.name);
             };
         };
     };
+    sessionStorage.setItem("stolen_songs", stolen_songs);
+    sessionStorage.setItem("taylors_versions", taylors_versions)
     document.getElementById("stolen").innerText = stolen_songs.length + " stolen songs found";
     document.getElementById("stolen").style.display = "block";
+    if (stolen_songs.length > 0) {
+        document.getElementById("taylorize").style.display = "block";
+    } else {
+        document.getElementById("taylorize").style.display = "none";
+    }
 };
+
+async function taylorize() {
+    let taylors_versions = sessionStorage.getItem("taylors_versions").toString();
+    let stolen_songs_str = sessionStorage.getItem("stolen_songs").toString();
+    let stolen_songs = stolen_songs_str.split(",");
+    let request_obj = {
+        "tracks": []
+    };
+    stolen_songs.forEach(uri => {
+        request_obj.tracks.push({ "uri": uri })
+    });
+    console.log(taylors_versions);
+    var id = document.getElementById("playlists_dropdown").value;
+    document.getElementById("caption").style.color = "#69FFB4";
+    document.getElementById("caption").innerText = "ADDING (Taylor's Versions)...";
+    document.getElementById("taylorizing").style.display = "inline-block";
+    document.getElementById("playlists_dropdown").style.display = "none";
+    document.getElementById("stolen").style.display = "none";
+    document.getElementById("taylorize").style.display = "none";
+    await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks?uris=" + taylors_versions, {
+        method: 'POST',
+        headers: {
+            Authorization: 'Bearer ' + auth_token
+        }
+    });
+    document.getElementById("caption").style.color = "red";
+    document.getElementById("caption").style.innerText = "REMOVING Stolen Songs...";
+    await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks", {
+        method: "DELETE",
+        headers: {
+            Authorization: 'Bearer ' + auth_token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(request_obj)
+    });
+    window.location.replace(origin + "?success=true");
+}
