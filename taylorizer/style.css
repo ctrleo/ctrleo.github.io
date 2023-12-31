@@ -3,6 +3,10 @@
     margin: 0px;
 }
 
+@font-face {
+    font-family: "Arial Mono";
+    src: url("../fonts/ArialMonoRegular.TTF");
+}
 
 #main {
     text-align: center;
@@ -82,4 +86,11 @@
     width: 30px;
     height: 30px;
     animation: spin 1s linear infinite;
+}
+
+#credit {
+    color: 333;
+    text-align: center;
+    font-size: 13px;
+    font-family: "Arial Mono";
 }
