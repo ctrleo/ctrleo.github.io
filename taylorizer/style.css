@@ -23,11 +23,12 @@
 
 #playlists_dropdown {
     display: none;
+    text-align: center;
 }
 
 #stolen {
     display: none;
-    color: aquamarine;
+    color: aqua;
 }
 
 #tv {
@@ -59,5 +60,9 @@
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg);; }
+    100% { transform: rotate(360deg); }
+}
+
+#taylorize {
+    display: none;
 }
