@@ -19,6 +19,7 @@ async function main() {
             .catch(function() {window.location.replace(origin + "?auth_error=true")})
             .finally(function() {
                 sessionStorage.setItem("access_token", token);
+                console.log(token)
                 window.location.replace(origin);
             });
     };
