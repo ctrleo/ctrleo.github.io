@@ -34,7 +34,7 @@ async function main() {
                 Authorization: 'Bearer ' + auth_token
             }
         });
-        var playlists = await getplaylists.json().items;
+        var playlists = (await getplaylists.json()).items;
         for (let i = 0; i < playlists.length; i++) {
             let playlist_name = playlists[i].name;
             let playlist_id = playlists[i].id;
