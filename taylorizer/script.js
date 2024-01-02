@@ -94,14 +94,16 @@ async function getplaylist() {
             });
             let parsed_search = await searching.json();
             let parsed_track = parsed_search.tracks.items[0];
+            let parsed_name = parsed_track.name
             if (parsed_track == undefined) {
                 console.log("Taylor's Version not found for " + track.name);
             } else {
-                if ((parsed_track.toLowerCase).contains(track.name.toLowerCase)) {
+                if (parsed_name.toLowerCase().contains(track.name.toLowerCase)) {
                     stolen_songs.push(track.uri);
                     taylors_versions.push(parsed_track.uri)
                 } else {
                     console.log("Taylor's Version not found for " + track.name);
+                    console.log("Err: " + parsed_track.toLowerCase + " does not contain " + track.name.toLowerCase())
                 };
             };
         };
