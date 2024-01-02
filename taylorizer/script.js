@@ -3,7 +3,6 @@ var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
 var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe)", "1989 (Big Machine Radio Release Special)"];
 var auth_token = sessionStorage.getItem("access_token");
-
 async function main() {
     var select = document.getElementById('playlists_dropdown');
     if (params.has("auth_error")) {
@@ -94,16 +93,14 @@ async function getplaylist() {
             });
             let parsed_search = await searching.json();
             let parsed_track = parsed_search.tracks.items[0];
-            let parsed_name = parsed_track.name.toLowerCase();
             if (parsed_track == undefined) {
-                break
+                console.log("Taylor's Version not found for " + track.name);
             } else {
-                if (parsed_name.includes(track.name.toLowerCase)) {
+                if (parsed_track.name.includes(track.name)) {
                     stolen_songs.push(track.uri);
-                    taylors_versions.push(parsed_track.uri);
+                    taylors_versions.push(parsed_track.uri)
                 } else {
                     console.log("Taylor's Version not found for " + track.name);
-                    console.log("Err: " + parsed_track.toLowerCase + " does not contain " + track.name.toLowerCase())
                 };
             };
         };
