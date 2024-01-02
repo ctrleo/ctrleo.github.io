@@ -26,7 +26,7 @@ async function main() {
         document.getElementById("caption").style.color = "limegreen";
         document.getElementById("caption").innerText = "DONE!"
     }
-    if ((auth_token !== null) && (auth_token !== undefined) {
+    if ((auth_token !== null) && (auth_token !== undefined)) {
         document.getElementById("sign-in").style.display = "none";
         var getplaylists = await fetch("https://api.spotify.com/v1/me/playlists", {
             method: 'GET',
