@@ -52,14 +52,34 @@ async function getplaylist() {
     var taylors_versions = [];
     var select = document.getElementById('playlists_dropdown');
     var id = select.value;
-    let playlist_tracks = await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks", {
+    let playlist_tracks = await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks" + "?limit=50", {
         method: 'GET',
         headers: {
             Authorization: 'Bearer ' + auth_token
         }
     });
     let jsontracks = await playlist_tracks.json();
+    let more = jsontracks.next;
+    if (more !== null) {
+        document.getElementById("caption").innerText = "(Playlists with over 50 songs may take longer to load)";
+        document.getElementById("caption").style.color = "#69FFB4";
+    }
     var tracks = jsontracks.items;
+    while (more !== null) {
+        let more_tracks = await fetch(more + "?limit=50", {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + auth_token
+            }
+        });
+        let moreasjson = more_tracks.json();
+        moreitems = moreasjson.tracks;
+        for (let m = 0; m < moreitems.length; t++) {
+            tracks.push(moreitems[m]);
+        };
+        more = more_tracks.next;
+
+    };
     for (let t = 0; t < tracks.length; t++) {
         let track = tracks[t].track;
         let taylors = track.name + " (Taylor's Version)";
