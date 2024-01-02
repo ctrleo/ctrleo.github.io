@@ -94,7 +94,7 @@ async function getplaylist() {
             let parsed_search = await searching.json();
             let parsed_track = parsed_search.tracks.items[0];
             if (parsed_track == undefined) {
-                break
+                console.log("Taylor's Version not found for " + track.name);
             } else {
                 if (parsed_track.name.includes(track.name)) {
                     stolen_songs.push(track.uri);
