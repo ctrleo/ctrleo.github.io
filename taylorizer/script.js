@@ -92,7 +92,12 @@ async function getplaylist() {
                 }
             });
             let parsed_search = await searching.json();
-            let parsed_track = parsed_search.tracks.items[0];
+            if (parsed_search.tracks.items[0]) {
+                let parsed_track = parsed_search.tracks.items[0];
+            } else {
+                let parsed_track = ["Search returned no items :("]
+            };
+            // lil gap
             if (parsed_track.name.includes(track.name)) {
                 stolen_songs.push(track.uri);
                 taylors_versions.push(parsed_track.uri)
