@@ -98,7 +98,7 @@ async function getplaylist() {
             if (parsed_track == undefined) {
                 console.log("Taylor's Version not found for " + track.name);
             } else {
-                if (parsed_name.contains(track.name.toLowerCase)) {
+                if (parsed_name.includes(track.name.toLowerCase)) {
                     stolen_songs.push(track.uri);
                     taylors_versions.push(parsed_track.uri);
                 } else {
