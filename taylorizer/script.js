@@ -73,7 +73,7 @@ async function getplaylist() {
             }
         });
         let moreasjson = more_tracks.json();
-        moreitems = moreasjson.tracks;
+        let moreitems = moreasjson.tracks;
         for (let m = 0; m < moreitems.length; t++) {
             tracks.push(moreitems[m]);
         };
