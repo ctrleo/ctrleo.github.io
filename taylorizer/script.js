@@ -92,17 +92,16 @@ async function getplaylist() {
                 }
             });
             let parsed_search = await searching.json();
-            if (parsed_search.tracks.items[0]) {
-                let parsed_track = parsed_search.tracks.items[0];
+            let parsed_track = parsed_search.tracks.items[0];
+            if (parsed_track == undefined) {
+                break
             } else {
-                let parsed_track = ["Search returned no items :("]
-            };
-            // lil gap
-            if (parsed_track.name.includes(track.name)) {
-                stolen_songs.push(track.uri);
-                taylors_versions.push(parsed_track.uri)
-            } else {
-                console.log("Taylor's Version not found for " + track.name);
+                if (parsed_track.name.includes(track.name)) {
+                    stolen_songs.push(track.uri);
+                    taylors_versions.push(parsed_track.uri)
+                } else {
+                    console.log("Taylor's Version not found for " + track.name);
+                };
             };
         };
     };
