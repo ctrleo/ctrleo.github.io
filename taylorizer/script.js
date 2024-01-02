@@ -4,14 +4,6 @@ var origin = window.location.origin + "/taylorizer";
 var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe)", "1989 (Big Machine Radio Release Special)"];
 var auth_token = sessionStorage.getItem("access_token");
 
-function stringReset(input) {
-    let lowercase = input.toLowerCase();
-    // I hate regex
-    let specials = lowercase.replace(/[^\w\s]/gi, '');
-    let nospace = specials.replace(/\s+/g, '');
-    return nospace;
-};
-
 async function main() {
     var select = document.getElementById('playlists_dropdown');
     if (params.has("auth_error")) {
@@ -105,9 +97,7 @@ async function getplaylist() {
             if (parsed_track == undefined) {
                 console.log("Taylor's Version not found for " + track.name);
             } else {
-                let parsed_name = stringReset(parsed_track.name);
-                let parsed_taylors = stringReset(taylors);
-                if (parsed_name == parsed_taylors) {
+                if ((parsed_track.toLowerCase).contains(track.name.toLowerCase)) {
                     stolen_songs.push(track.uri);
                     taylors_versions.push(parsed_track.uri)
                 } else {
