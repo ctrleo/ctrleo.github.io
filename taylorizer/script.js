@@ -59,28 +59,24 @@ async function getplaylist() {
         }
     });
     let jsontracks = await playlist_tracks.json();
-    let more = jsontracks.next;
+    var tracks = jsontracks.items;
+    var more = jsontracks.next;
     console.log(more);
     if (more !== null) {
         document.getElementById("caption").innerText = "(Playlists with over 50 songs may take longer to load)";
         document.getElementById("caption").style.color = "#69FFB4";
     }
-    var tracks = jsontracks.items;
     while (more !== null) {
-        let more_tracks = await fetch(more + "?limit=50", {
+        var newitems = await fetch(more, {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + auth_token
             }
-        });
-        let moreasjson = await more_tracks.json();
-        let moreitems = moreasjson.items;
-        for (let m = 0; m < moreitems.length; m++) {
-            tracks.push(moreitems[m]);
-        };
-        more = more_tracks.next;
-
-    };
+        })
+        var newjson = await newitems.json();
+        console.log(JSON.stringify(newjson));
+        more = null;
+    }
     for (let t = 0; t < tracks.length; t++) {
         let track = tracks[t].track;
         let taylors = track.name + " (Taylor's Version)";
