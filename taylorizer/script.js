@@ -1,7 +1,6 @@
 var backend = "https://138.68.116.108";
 var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
-var auth_token = sessionStorage.getItem("access_token");
 var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe)", "1989 (Big Machine Radio Release Special)"];
 
 async function main() {
@@ -27,7 +26,8 @@ async function main() {
         document.getElementById("caption").style.color = "limegreen";
         document.getElementById("caption").innerText = "DONE!"
     }
-    if (auth_token !== null) {
+    if (sessionStorage.getItem("access_token") !== null) {
+        var auth_token = sessionStorage.getItem("access_token");
         document.getElementById("sign-in").style.display = "none";
         var getplaylists = await fetch("https://api.spotify.com/v1/me/playlists", {
             method: 'GET',
