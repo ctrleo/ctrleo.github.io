@@ -74,7 +74,7 @@ async function getplaylist() {
         });
         let moreasjson = await more_tracks.json();
         let moreitems = moreasjson.items;
-        for (let m = 0; m < moreitems.length; t++) {
+        for (let m = 0; m < moreitems.length; m++) {
             tracks.push(moreitems[m]);
         };
         more = more_tracks.next;
