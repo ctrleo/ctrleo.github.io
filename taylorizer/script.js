@@ -47,6 +47,7 @@ async function main() {
 };
 
 async function getplaylist() {
+    document.getElementById("loading").style.display = "block"
     var stolen_songs = [];
     var taylors_versions = [];
     var select = document.getElementById('playlists_dropdown');
@@ -82,6 +83,7 @@ async function getplaylist() {
     };
     sessionStorage.setItem("stolen_songs", stolen_songs);
     sessionStorage.setItem("taylors_versions", taylors_versions)
+    document.getElementById("loading").style.display = "none";
     document.getElementById("stolen").innerText = stolen_songs.length + " stolen songs found";
     document.getElementById("stolen").style.display = "block";
     if (stolen_songs.length > 0) {
