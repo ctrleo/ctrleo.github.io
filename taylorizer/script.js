@@ -72,7 +72,7 @@ async function getplaylist() {
                 Authorization: 'Bearer ' + auth_token
             }
         });
-        let moreasjson = more_tracks.json();
+        let moreasjson = await more_tracks.json();
         let moreitems = moreasjson.tracks;
         for (let m = 0; m < moreitems.length; t++) {
             tracks.push(moreitems[m]);
