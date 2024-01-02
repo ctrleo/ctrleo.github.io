@@ -67,15 +67,18 @@ async function getplaylist() {
         document.getElementById("caption").style.color = "#69FFB4";
     }
     while (more !== null) {
-        var newitems = await fetch(more, {
+        var moretracks = await fetch(more, {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + auth_token
             }
         })
-        var newjson = await newitems.json();
-        console.log(JSON.stringify(newjson));
-        more = null;
+        var newjson = await moretracks.json();
+        var moreitems = newjson.items;
+        for (let i = 0; i < moreitems.length; i++) {
+            tracks.push(moreitems[i]);
+        }
+        more = newjson.next;
     }
     for (let t = 0; t < tracks.length; t++) {
         let track = tracks[t].track;
