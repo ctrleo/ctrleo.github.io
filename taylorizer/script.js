@@ -61,7 +61,6 @@ async function getplaylist() {
     let jsontracks = await playlist_tracks.json();
     var tracks = jsontracks.items;
     var more = jsontracks.next;
-    console.log(more);
     if (more !== null) {
         document.getElementById("caption").innerText = "(Playlists with over 50 songs may take longer to load)";
         document.getElementById("caption").style.color = "#69FFB4";
