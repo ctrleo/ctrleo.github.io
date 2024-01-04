@@ -95,11 +95,12 @@ async function getplaylist() {
             if (parsed_track == undefined) {
                 console.log("Taylor's Version not found for " + track.name);
             } else {
-                if (parsed_track.name.includes(track.name)) {
+                if (parsed_track.name.includes(track.name) || parsed_track.name.includes(taylors)) {
                     stolen_songs.push(track.uri);
                     taylors_versions.push(parsed_track.uri)
                 } else {
                     console.log("Taylor's Version not found for " + track.name);
+                    console.log("Error: " + parsed_track.name + "does not include " + track.name + "OR" + taylors);
                 };
             };
         };
