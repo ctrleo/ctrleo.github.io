@@ -94,7 +94,7 @@ async function getplaylist() {
     }
     for (let t = 0; t < tracks.length; t++) {
         let track = tracks[t].track;
-        let taylors = track.name + " (Taylor's Version)";
+        let taylors = maketaylors(track.name);
         if (stolen.includes(track.album.name)) {
             let spotifysearch = encodeURI("track:" + taylors + " artist:Taylor Swift");
             let searching = await fetch("https://api.spotify.com/v1/search?q=" + spotifysearch + "&type=track&limit=1", {
