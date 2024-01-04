@@ -3,6 +3,19 @@ var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
 var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe)", "1989 (Big Machine Radio Release Special)"];
 var auth_token = sessionStorage.getItem("access_token");
+
+function maketaylors(title) {
+    if (title == "Forever & Always - Piano Version") {
+        return "Forever & Always (Piano Version) (Taylor's Version)";
+    }
+    else if (title == "SuperStar") {
+        return "Superstar (Taylor's Version)";
+    }
+    else {
+        return title + " (Taylor's Version)";
+    }
+}
+
 async function main() {
     var select = document.getElementById('playlists_dropdown');
     if (params.has("auth_error")) {
