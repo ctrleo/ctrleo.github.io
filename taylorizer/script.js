@@ -100,7 +100,7 @@ async function getplaylist() {
                     taylors_versions.push(parsed_track.uri)
                 } else {
                     console.log("Taylor's Version not found for " + track.name);
-                    console.log("Error: " + parsed_track.name + "does not include " + track.name + "OR" + taylors);
+                    console.log("Error: " + parsed_track.name + "does not include " + track.name + " OR " + taylors);
                 };
             };
         };
