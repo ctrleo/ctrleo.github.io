@@ -5,9 +5,10 @@ var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)",
 var auth_token = sessionStorage.getItem("access_token");
 var stolen_songs = [];
 var taylors_versions = [];
+var manual;
 
 function maketaylors(title) {
-    var manual = true;
+    manual = true;
     if (title == "Forever & Always - Piano Version") {
         // we have to manually do this one for some reason
         stolen_songs.push("spotify:track:13MAWVUSkbGMUi6I7RowRK");
