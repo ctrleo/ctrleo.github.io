@@ -13,14 +13,17 @@ function maketaylors(title) {
     }
     else {
         return title + " (Taylor's Version)";
-    }
-}
+    };
+};
 
 async function main() {
     var select = document.getElementById('playlists_dropdown');
     if (params.has("auth_error")) {
         document.getElementById("caption").style.color = "red";
-        document.getElementById("caption").innerText = "Auth error occured :/ please try again!"
+        document.getElementById("caption").innerText = "Auth error occured :/ please try again!";
+        if (sessionStorage.getItem("access_token")) {
+            sessionStorage.removeItem("access_token");
+        }
     };
     if (params.has("code")) {
         var token;
@@ -37,7 +40,7 @@ async function main() {
     };
     if (params.has("success")) {
         document.getElementById("caption").style.color = "limegreen";
-        document.getElementById("caption").innerText = "DONE!"
+        document.getElementById("caption").innerText = "DONE!";
     }
     if ((auth_token !== null) && (auth_token !== undefined)) {
         document.getElementById("sign-in").style.display = "none";
@@ -47,15 +50,19 @@ async function main() {
                 Authorization: 'Bearer ' + auth_token
             }
         });
-        var playlistsjson = await getplaylists.json();
-        var playlists = playlistsjson.items;
-        for (let i = 0; i < playlists.length; i++) {
-            let playlist_name = playlists[i].name;
-            let playlist_id = playlists[i].id;
-            let option = new Option(playlist_name, playlist_id);
-            select.add(option);
+        if (getplaylists.status !== 200) {
+            window.location.replace(origin + "?auth_error=true");
+        } else {
+            var playlistsjson = await getplaylists.json();
+            var playlists = playlistsjson.items;
+            for (let i = 0; i < playlists.length; i++) {
+                let playlist_name = playlists[i].name;
+                let playlist_id = playlists[i].id;
+                let option = new Option(playlist_name, playlist_id);
+                select.add(option);
+            };
+            select.style.display = "inline-block";
         };
-        select.style.display = "inline-block";
     };
 };
 
@@ -84,7 +91,7 @@ async function getplaylist() {
             headers: {
                 Authorization: 'Bearer ' + auth_token
             }
-        })
+        });
         var newjson = await moretracks.json();
         var moreitems = newjson.items;
         for (let i = 0; i < moreitems.length; i++) {
