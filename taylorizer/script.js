@@ -3,6 +3,8 @@ var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
 var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe)", "1989 (Big Machine Radio Release Special)"];
 var auth_token = sessionStorage.getItem("access_token");
+var stolen_songs = [];
+var taylors_versions = [];
 
 function maketaylors(title) {
     var manual = true;
@@ -72,9 +74,7 @@ async function main() {
 };
 
 async function getplaylist() {
-    document.getElementById("loading").style.display = "block"
-    var stolen_songs = [];
-    var taylors_versions = [];
+    document.getElementById("loading").style.display = "block";
     var select = document.getElementById('playlists_dropdown');
     var id = select.value;
     let playlist_tracks = await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks" + "?limit=50", {
