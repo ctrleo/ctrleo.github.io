@@ -123,7 +123,7 @@ async function getplaylist() {
             } else if (manual) {
                 console.log(taylors + " added manually");
             } else {
-                if (parsed_track.name.includes(track.name) || parsed_track.name.includes(taylors)) {
+                if (parsed_track.name.includes(track.name) || parsed_track.name == taylors) {
                     stolen_songs.push(track.uri);
                     taylors_versions.push(parsed_track.uri)
                 } else {
