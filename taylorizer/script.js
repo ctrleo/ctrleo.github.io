@@ -5,13 +5,18 @@ var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)",
 var auth_token = sessionStorage.getItem("access_token");
 
 function maketaylors(title) {
+    var manual = true;
     if (title == "Forever & Always - Piano Version") {
+        // we have to manually do this one for some reason
+        stolen_songs.push("spotify:track:13MAWVUSkbGMUi6I7RowRK");
+        taylors_versions.push("spotify:track:01QdEx6kFr78ZejhQtWR5m");
         return "Forever & Always (Piano Version) (Taylor's Version)";
     }
     else if (title == "SuperStar") {
         return "Superstar (Taylor's Version)";
     }
     else {
+        manual = false;
         return title + " (Taylor's Version)";
     };
 };
@@ -114,6 +119,8 @@ async function getplaylist() {
             let parsed_track = parsed_search.tracks.items[0];
             if (parsed_track == undefined) {
                 console.log("Taylor's Version not found for " + track.name);
+            } else if (manual) {
+                console.log(taylors + " added manually");
             } else {
                 if (parsed_track.name.includes(track.name) || parsed_track.name.includes(taylors)) {
                     stolen_songs.push(track.uri);
