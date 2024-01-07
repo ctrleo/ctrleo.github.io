@@ -14,11 +14,23 @@ function maketaylors(title) {
         stolen_songs.push("spotify:track:13MAWVUSkbGMUi6I7RowRK");
         taylors_versions.push("spotify:track:01QdEx6kFr78ZejhQtWR5m");
         return "Forever & Always (Piano Version) (Taylor's Version)";
-    }
-    else if (title == "SuperStar") {
+    } else if (title == "SuperStar") {
+        manual = false;
         return "Superstar (Taylor's Version)";
-    }
-    else {
+    } else if (title == "You're Not Sorry") {
+        // same as forever & always
+        stolen_songs.push("spotify:track:3JhvYnOfKLJuWC7jEU0GmJ");
+        taylors_versions.push("spotify:track:6iiAfo4wTA2CVC3Uwx9uh8");
+    } else if (title == "Forever & Always") {
+        stolen_songs.push("spotify:track:3NKCWBT2uKp8rxSkcvIrdX");
+        taylors_versions.push("spotify:track:1msEuwSBneBKpVCZQcFTsU");
+    } else if (title == "Stay Stay Stay") {
+        stolen_songs.push("spotify:track:0F2S1QlnMaOfmNHIgmES3k");
+        taylors_versions.push("spotify:track:7eQj6r5PIdYKEIZjucBMcq");
+    } else if (title == "I Knew You Were Trouble.") {
+        manual = false;
+        return "I Knew You Were Trouble (Taylor's Version)";
+    } else {
         manual = false;
         return title + " (Taylor's Version)";
     };
