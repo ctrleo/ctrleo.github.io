@@ -159,14 +159,21 @@ async function getplaylist() {
 };
 
 async function taylorize() {
-    let taylors_versions = sessionStorage.getItem("taylors_versions").toString();
+    let taylors_versions_str = sessionStorage.getItem("taylors_versions").toString();
     let stolen_songs_str = sessionStorage.getItem("stolen_songs").toString();
     let stolen_songs = stolen_songs_str.split(",");
-    let request_obj = {
+    let taylors_versions = taylors_versions_str.split(",");
+    let post_obj = {
+        "uris": []
+    };
+    let delete_obj = {
         "tracks": []
     };
+    taylors_versions.forEach(uri => {
+        post_obj.uris.push(uri);
+    })
     stolen_songs.forEach(uri => {
-        request_obj.tracks.push({ "uri": uri })
+        delete_obj.tracks.push({ "uri": uri });
     });
     console.log(taylors_versions);
     var id = document.getElementById("playlists_dropdown").value;
@@ -176,11 +183,12 @@ async function taylorize() {
     document.getElementById("playlists_dropdown").style.display = "none";
     document.getElementById("stolen").style.display = "none";
     document.getElementById("taylorize").style.display = "none";
-    await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks?uris=" + taylors_versions, {
+    await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks", {
         method: 'POST',
         headers: {
             Authorization: 'Bearer ' + auth_token
-        }
+        },
+        body : JSON.stringify(post_obj)
     });
     document.getElementById("caption").style.color = "red";
     document.getElementById("caption").style.innerText = "REMOVING Stolen Songs...";
@@ -190,7 +198,7 @@ async function taylorize() {
             Authorization: 'Bearer ' + auth_token,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(request_obj)
+        body: JSON.stringify(delete_obj)
     });
     window.location.replace(origin + "?success=true");
 }
