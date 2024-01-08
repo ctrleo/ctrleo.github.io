@@ -18,7 +18,7 @@ function login() {
         scope: scope,
         show_dialog: true
     });
-    window.location.assign("https://accounts.spotify.com/authorize?" + login_url_params.toString);
+    window.location.assign("https://accounts.spotify.com/authorize?" + login_url_params.toString());
 };
 
 function maketaylors(title) {
