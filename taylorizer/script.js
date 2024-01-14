@@ -1,4 +1,4 @@
-var backend = "https://138.68.116.108";
+var backend = "https://wavesparkleheartwing.dev"; // shiny new domain name!
 var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
 var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe)", "1989 (Big Machine Radio Release Special)"];
