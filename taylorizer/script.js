@@ -151,18 +151,20 @@ async function getplaylist() {
             });
             let parsed_search = await searching.json();
             let parsed_track = parsed_search.tracks.items[0];
-            if (parsed_track == undefined) {
-                console.log("Taylor's Version not found for " + track.name);
-            } else if (manual) {
+            if (manual) {
                 console.log(taylors + " added manually");
             } else {
                 if (parsed_track.name.includes(track.name) || parsed_track.name == taylors) {
                     stolen_songs.push(track.uri);
                     taylors_versions.push(parsed_track.uri)
                 } else {
-                    console.log("Taylor's Version not found for " + track.name);
-                    console.log("Error: " + parsed_track.name + "does not include " + track.name + " OR " + taylors);
-                    sessionStorage.setItem(track.name, parsed_track.name)
+                    fetch(backend + "/notif", {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'plain/text'
+                        },
+                        body: track.name + ' unsupported'
+                    });
                 };
             };
         };
