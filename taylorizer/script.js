@@ -10,16 +10,6 @@ var redirect_uri = "https://ctrleo.github.io/taylorizer";
 var client_id = "d128390f0da0402896d4d02cdfbf2e26";
 var scope = "playlist-read-private playlist-modify-private playlist-modify-public"
 
-function login() {
-    var login_url_params = new URLSearchParams({
-        response_type: 'code',
-        client_id: client_id,
-        redirect_uri: redirect_uri,
-        scope: scope,
-        show_dialog: true
-    });
-    window.location.assign("https://accounts.spotify.com/authorize?" + login_url_params.toString());
-};
 
 function maketaylors(title, uri) {
     if (title == "Forever & Always - Piano Version") {
