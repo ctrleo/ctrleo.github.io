@@ -55,6 +55,7 @@
     display: inline-block;
     padding: 15px 30px;
     border-radius: 25px;
+    text-decoration: none;
 }
 #socials {
     text-align: center;
