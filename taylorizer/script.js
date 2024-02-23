@@ -1,4 +1,4 @@
-var backend = "https://wavesparkleheartwing.dev"; // shiny new domain name!
+var backend = "https://wavesparkleheartwing.dev";
 var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
 var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe)", "1989 (Big Machine Radio Release Special)"];
@@ -21,38 +21,12 @@ function login() {
     window.location.assign("https://accounts.spotify.com/authorize?" + login_url_params.toString());
 };
 
-function maketaylors(title, uri) {
-    if (title == "Forever & Always - Piano Version") {
-        // we have to manually do this one for some reason
-        manual = true;
-        stolen_songs.push(uri);
-        taylors_versions.push("spotify:track:01QdEx6kFr78ZejhQtWR5m");
-        return "Forever & Always (Piano Version) (Taylor's Version)";
-    } else if (title == "SuperStar") {
-        manual = true;
-        stolen_songs.push(uri);
-        taylors_versions.push("spotify:track:51A8eKvvZz9uydvIZ7xRSV");
+function maketaylors(title) {
+    if (title == "SuperStar") {
         return "Superstar (Taylor's Version)";
-    } else if (title == "You're Not Sorry") {
-        // same as forever & always
-        manual = true;
-        stolen_songs.push(uri);
-        taylors_versions.push("spotify:track:6iiAfo4wTA2CVC3Uwx9uh8");
-        return "You're Not Sorry (Taylor's Version)";
-    } else if (title == "Forever & Always") {
-        manual = true;
-        stolen_songs.push(uri);
-        taylors_versions.push("spotify:track:1msEuwSBneBKpVCZQcFTsU");
-        return "Forever & Always (Taylor's Version)";
-    } else if (title == "Stay Stay Stay") {
-        manual = true;
-        stolen_songs.push(uri);
-        taylors_versions.push("spotify:track:7eQj6r5PIdYKEIZjucBMcq");
     } else if (title == "I Knew You Were Trouble.") {
-        manual = false;
         return "I Knew You Were Trouble (Taylor's Version)";
     } else {
-        manual = false;
         return title + " (Taylor's Version)";
     };
 };
