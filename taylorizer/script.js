@@ -9,7 +9,7 @@ var redirect_uri = "https://ctrleo.github.io/taylorizer";
 var client_id = "d128390f0da0402896d4d02cdfbf2e26";
 var scope = "playlist-read-private playlist-modify-private playlist-modify-public"
 
-function login() {
+function getLoginURL() {
     var login_url_params = new URLSearchParams({
         response_type: 'code',
         client_id: client_id,
@@ -17,7 +17,7 @@ function login() {
         scope: scope,
         show_dialog: true
     });
-    window.location.assign("https://accounts.spotify.com/authorize?" + login_url_params.toString());
+    return "https://accounts.spotify.com/authorize?" + login_url_params.toString();
 };
 
 function maketaylors(title) {
@@ -31,6 +31,7 @@ function maketaylors(title) {
 };
 
 async function main() {
+    document.getElementById("sign-in").href = getLoginURL();
     var select = document.getElementById('playlists_dropdown');
     if (params.has("auth_error")) {
         document.getElementById("caption").style.color = "red";
