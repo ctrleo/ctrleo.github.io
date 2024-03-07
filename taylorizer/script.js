@@ -125,21 +125,11 @@ async function getplaylist() {
             });
             let parsed_search = await searching.json();
             let parsed_track = parsed_search.tracks.items[0];
-            if (manual) {
-                console.log(taylors + " added manually");
+            if (parsed_track.name.includes(track.name) || parsed_track.name == taylors) {
+                stolen_songs.push(track.uri);
+                taylors_versions.push(parsed_track.uri)
             } else {
-                if (parsed_track.name.includes(track.name) || parsed_track.name == taylors) {
-                    stolen_songs.push(track.uri);
-                    taylors_versions.push(parsed_track.uri)
-                } else {
-                    fetch(backend + "/notif", {
-                        method: 'POST',
-                        headers: {
-                            'content-type': 'plain/text'
-                        },
-                        body: track.name + ' unsupported'
-                    });
-                };
+                console.log(`Song: ${parsed_track.name} not supported`);
             };
         };
     };
