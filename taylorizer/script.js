@@ -44,7 +44,7 @@ async function main() {
         var token;
         document.getElementById("sign-in").style.display = "none";
         document.getElementById("loading").style.display = "inline-block";
-        fetch(backend + "/?code=" + params.get("code"))
+        fetch(backend + "?code=" + params.get("code"))
             .then(response => response.json())
             .then((json) => {token = json.access_token})
             .catch(function() {window.location.replace(origin + "?auth_error=true")})
