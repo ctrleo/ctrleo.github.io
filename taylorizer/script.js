@@ -5,7 +5,7 @@ var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)",
 var auth_token = sessionStorage.getItem("access_token");
 var stolen_songs = [];
 var taylors_versions = [];
-var redirect_uri = "http://127.0.0.1:8080/taylorizer";
+var redirect_uri = "https://ctrleo.github.io/taylorizer";
 var client_id = "d128390f0da0402896d4d02cdfbf2e26";
 var scope = "playlist-read-private playlist-modify-private playlist-modify-public"
 
@@ -42,14 +42,16 @@ async function main() {
     };
     if (params.has("code")) {
         var token;
+        var debug;
         document.getElementById("sign-in").style.display = "none";
         document.getElementById("loading").style.display = "inline-block";
         fetch(backend + "?code=" + params.get("code"))
             .then(response => response.json())
-            .then((json) => {token = json.access_token})
+            .then((json) => {token = json.access_token; debug = json;})
             .catch(function() {window.location.replace(origin + "?auth_error=true")})
             .finally(function() {
                 sessionStorage.setItem("access_token", token);
+                sessionStorage.setItem("full_auth", JSON.stringify(debug));
                 window.location.replace(origin);
             });
     };
