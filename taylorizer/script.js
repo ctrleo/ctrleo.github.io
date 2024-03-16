@@ -5,7 +5,7 @@ var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)",
 var auth_token = sessionStorage.getItem("access_token");
 var stolen_songs = [];
 var taylors_versions = [];
-var redirect_uri = "https://ctrleo.github.io/taylorizer";
+var redirect_uri = "http://127.0.0.1:8080/taylorizer";
 var client_id = "d128390f0da0402896d4d02cdfbf2e26";
 var scope = "playlist-read-private playlist-modify-private playlist-modify-public"
 
