@@ -1,4 +1,4 @@
-var backend = "https://wavesparkleheartwing.dev";
+var backend = "https://f9rj8i3m9k.execute-api.eu-west-2.amazonaws.com/default/taylorizer_auth";
 var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
 var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe)", "1989 (Big Machine Radio Release Special)"];
@@ -44,9 +44,9 @@ async function main() {
         var token;
         document.getElementById("sign-in").style.display = "none";
         document.getElementById("loading").style.display = "inline-block";
-        fetch(backend + "/callback?code=" + params.get("code"))
-            .then(response => response.text())
-            .then(text => {token = text})
+        fetch(backend + "/?code=" + params.get("code"))
+            .then(response => response.json())
+            .then((json) => {token = json.access_token})
             .catch(function() {window.location.replace(origin + "?auth_error=true")})
             .finally(function() {
                 sessionStorage.setItem("access_token", token);
