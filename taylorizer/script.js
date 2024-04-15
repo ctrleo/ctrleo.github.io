@@ -2,7 +2,7 @@ var backend = "https://f9rj8i3m9k.execute-api.eu-west-2.amazonaws.com/default/ta
 var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
 var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe)", "1989 (Big Machine Radio Release Special)"];
-var auth_token = sessionStorage.getItem("access_token");
+var auth_token = localStorage.getItem("access_token");
 var stolen_songs = [];
 var taylors_versions = [];
 var redirect_uri = "https://ctrleo.github.io/taylorizer";
@@ -36,8 +36,8 @@ async function main() {
     if (params.has("auth_error")) {
         document.getElementById("caption").style.color = "red";
         document.getElementById("caption").innerText = "Auth error occured :/ please try again!";
-        if (sessionStorage.getItem("access_token")) {
-            sessionStorage.removeItem("access_token");
+        if (localStorage.getItem("access_token")) {
+            localStorage.removeItem("access_token");
         }
     };
     if (params.has("code")) {
@@ -50,8 +50,8 @@ async function main() {
             .then((json) => {token = json.access_token; debug = json;})
             .catch(function() {window.location.replace(origin + "?auth_error=true")})
             .finally(function() {
-                sessionStorage.setItem("access_token", token);
-                sessionStorage.setItem("full_auth", JSON.stringify(debug));
+                localStorage.setItem("access_token", token);
+                localStorage.setItem("full_auth", JSON.stringify(debug));
                 window.location.replace(origin);
             });
     };
@@ -135,8 +135,8 @@ async function getplaylist() {
             };
         };
     };
-    sessionStorage.setItem("stolen_songs", stolen_songs);
-    sessionStorage.setItem("taylors_versions", taylors_versions)
+    localStorage.setItem("stolen_songs", stolen_songs);
+    localStorage.setItem("taylors_versions", taylors_versions)
     document.getElementById("loading").style.display = "none";
     document.getElementById("stolen").innerText = stolen_songs.length + " stolen songs found";
     document.getElementById("stolen").style.display = "block";
@@ -148,8 +148,8 @@ async function getplaylist() {
 };
 
 async function taylorize() {
-    let taylors_versions_str = sessionStorage.getItem("taylors_versions").toString();
-    let stolen_songs_str = sessionStorage.getItem("stolen_songs").toString();
+    let taylors_versions_str = localStorage.getItem("taylors_versions").toString();
+    let stolen_songs_str = localStorage.getItem("stolen_songs").toString();
     let stolen_songs = stolen_songs_str.split(",");
     let taylors_versions = taylors_versions_str.split(",");
     let post_obj = {
