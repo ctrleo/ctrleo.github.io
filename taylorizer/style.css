@@ -57,6 +57,13 @@
     border-radius: 25px;
     text-decoration: none;
 }
+
+#sign-out {
+    background-color: white;
+    color: black;
+    display: none;
+}
+
 #socials {
     text-align: center;
 }

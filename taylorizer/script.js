@@ -61,6 +61,7 @@ async function main() {
     }
     if ((auth_token !== null) && (auth_token !== undefined)) {
         document.getElementById("sign-in").style.display = "none";
+        document.getElementById("sign-out").style.display = "block";
         var getplaylists = await fetch("https://api.spotify.com/v1/me/playlists", {
             method: 'GET',
             headers: {
@@ -82,6 +83,11 @@ async function main() {
         };
     };
 };
+
+function logout() {
+    localStorage.removeItem("access_token");
+    window.location.replace(origin);
+}
 
 async function getplaylist() {
     document.getElementById("loading").style.display = "block";
