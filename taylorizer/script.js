@@ -137,7 +137,7 @@ async function getplaylist() {
                 stolen_songs.push(track.uri);
                 taylors_versions.push(parsed_track.uri)
             } else {
-                console.log(`Song: ${parsed_track.name} not supported`);
+                console.log(`Song: ${track.name} not found, found ${parsed_track.name}`);
             };
         };
     };
