@@ -141,8 +141,8 @@ async function getplaylist() {
             };
         };
     };
-    localStorage.setItem("stolen_songs", stolen_songs);
-    localStorage.setItem("taylors_versions", taylors_versions)
+    sessionStorage.setItem("stolen_songs", stolen_songs);
+    sessionStorage.setItem("taylors_versions", taylors_versions)
     document.getElementById("loading").style.display = "none";
     document.getElementById("stolen").innerText = stolen_songs.length + " stolen songs found";
     document.getElementById("stolen").style.display = "block";
@@ -154,8 +154,8 @@ async function getplaylist() {
 };
 
 async function taylorize() {
-    let taylors_versions_str = localStorage.getItem("taylors_versions").toString();
-    let stolen_songs_str = localStorage.getItem("stolen_songs").toString();
+    let taylors_versions_str = sessionStorage.getItem("taylors_versions").toString();
+    let stolen_songs_str = sessionStorage.getItem("stolen_songs").toString();
     let stolen_songs = stolen_songs_str.split(",");
     let taylors_versions = taylors_versions_str.split(",");
     let post_obj = {
