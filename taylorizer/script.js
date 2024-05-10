@@ -133,7 +133,7 @@ async function getplaylist() {
             });
             let parsed_search = await searching.json();
             let parsed_track = parsed_search.tracks.items[0];
-            if (parsed_track.name.includes(track.name) || parsed_track.name == taylors) {
+            if (parsed_track.name.includes(track.name) || parsed_track.name.replace("’", "'") == taylors) {
                 stolen_songs.push(track.uri);
                 taylors_versions.push(parsed_track.uri)
             } else {
