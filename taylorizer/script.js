@@ -22,11 +22,11 @@ function getLoginURL() {
 
 function maketaylors(title) {
     if (title == "SuperStar") {
-        return "Superstar (Taylor's Version)";
+        return "Superstar (Taylor’s Version)";
     } else if (title == "I Knew You Were Trouble.") {
-        return "I Knew You Were Trouble (Taylor's Version)";
+        return "I Knew You Were Trouble (Taylor’s Version)";
     } else {
-        return title + " (Taylor's Version)";
+        return title.replace("'", "’") + " (Taylor’s Version)";
     };
 };
 
@@ -133,7 +133,7 @@ async function getplaylist() {
             });
             let parsed_search = await searching.json();
             let parsed_track = parsed_search.tracks.items[0];
-            if (parsed_track.name.includes(track.name) || parsed_track.name.replace("’", "'") == taylors) {
+            if (parsed_track.name.includes(track.name) || parsed_track.name.replace("'", "’") == taylors) {
                 stolen_songs.push(track.uri);
                 taylors_versions.push(parsed_track.uri)
             } else {
