@@ -42,16 +42,14 @@ async function main() {
     };
     if (params.has("code")) {
         var token;
-        var debug;
         document.getElementById("sign-in").style.display = "none";
         document.getElementById("loading").style.display = "inline-block";
         fetch(backend + "?code=" + params.get("code"))
             .then(response => response.json())
-            .then((json) => {token = json.access_token; debug = json;})
+            .then((json) => {token = json.access_token})
             .catch(function() {window.location.replace(origin + "?auth_error=true")})
             .finally(function() {
                 localStorage.setItem("access_token", token);
-                localStorage.setItem("full_auth", JSON.stringify(debug));
                 window.location.replace(origin);
             });
     };
