@@ -140,7 +140,7 @@ async function getplaylist() {
             let parsed_search = await searching.json();
             let parsed_track = parsed_search.tracks.items[0];
             if (parsed_track.name.includes(track.name) || parsed_track.name.replaceAll("’", "'") == taylors) {
-                console.log(`DEBUG: ${taylors} found in ${parsed.track.name}`);
+                console.log(`DEBUG: ${taylors} found in ${parsed_track.name}`);
                 stolen_songs.push(track.uri);
                 taylors_versions.push(parsed_track.uri);
             } else {
