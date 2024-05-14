@@ -93,7 +93,7 @@ async function getplaylist() {
     document.getElementById("loading").style.display = "block";
     var select = document.getElementById('playlists_dropdown');
     var id = select.value;
-    console.log(`Searching playlist ID ${id}`);
+    console.log(`Searching playlist: ${select.label}; ID ${id}`);
     let playlist_tracks = await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks" + "?limit=50", {
         method: 'GET',
         headers: {
