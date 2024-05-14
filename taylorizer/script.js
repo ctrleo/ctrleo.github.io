@@ -118,6 +118,7 @@ async function getplaylist() {
         var moreitems = newjson.items;
         for (let i = 0; i < moreitems.length; i++) {
             tracks.push(moreitems[i]);
+            console.log(`Tracks found: ${tracks}`);
         }
         more = newjson.next;
     }
