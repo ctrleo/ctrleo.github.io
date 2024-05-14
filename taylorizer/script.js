@@ -90,6 +90,7 @@ function logout() {
 }
 
 async function getplaylist() {
+    document.getElementById("stolen").style.display = "none";
     if (sessionStorage.getItem("stolen_songs")) {
         sessionStorage.removeItem("stolen_songs");
     }
