@@ -90,6 +90,12 @@ function logout() {
 }
 
 async function getplaylist() {
+    if (sessionStorage.getItem("stolen_songs")) {
+        sessionStorage.removeItem("stolen_songs");
+    }
+    if (sessionStorage.getItem("taylors_versions")) {
+        sessionStorage.removeItem("taylors_versions");
+    }
     document.getElementById("loading").style.display = "block";
     var select = document.getElementById('playlists_dropdown');
     var id = select.value;
