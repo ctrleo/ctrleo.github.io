@@ -88,17 +88,14 @@ function logout() {
 }
 
 async function getplaylist() {
+    stolen_songs = [];
+    taylors_versions = [];
+    sessionStorage.clear();
     document.getElementById("stolen").style.display = "none";
-    if (sessionStorage.getItem("stolen_songs")) {
-        sessionStorage.removeItem("stolen_songs");
-    }
-    if (sessionStorage.getItem("taylors_versions")) {
-        sessionStorage.removeItem("taylors_versions");
-    }
     document.getElementById("loading").style.display = "block";
     var select = document.getElementById('playlists_dropdown');
     var id = select.value;
-    console.log(`Searching playlist ${select.name}, ID: ${id}`);
+    console.log(`Searching playlist ID ${id}`);
     let playlist_tracks = await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks" + "?limit=50", {
         method: 'GET',
         headers: {
