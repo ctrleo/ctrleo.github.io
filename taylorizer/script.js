@@ -23,6 +23,8 @@ function maketaylors(title) {
         return "Superstar (Taylor’s Version)";
     } else if (title == "I Knew You Were Trouble.") {
         return "I Knew You Were Trouble (Taylor's Version)";
+    } else if (title == "Treacherous - Original Demo Recording") {
+        return "Treacherous (Taylor's Version)";
     } else {
         return title.replaceAll("’", "'") + " (Taylor's Version)";
     };
