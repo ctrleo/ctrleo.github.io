@@ -1,7 +1,7 @@
 var backend = "https://f9rj8i3m9k.execute-api.eu-west-2.amazonaws.com/default/taylorizer_auth";
 var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
-var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe Edition)", "1989 (Big Machine Radio Release Special)"];
+var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Edition)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe Edition)", "1989 (Big Machine Radio Release Special)"];
 var auth_token = localStorage.getItem("access_token");
 var redirect_uri = "https://ctrleo.github.io/taylorizer";
 var client_id = "d128390f0da0402896d4d02cdfbf2e26";
