@@ -52,6 +52,10 @@ async function main() {
             localStorage.removeItem("access_token");
         }
     };
+    if (params.has("playlist_error")) {
+        document.getElementById("caption").style.color = "red";
+        document.getElementById("caption").innerText = "Error occurred while taylorizing! ERR CODE: " + params.get("playlist_error");
+    }
     if (params.has("code")) {
         var token;
         document.getElementById("sign-in").style.display = "none";
@@ -145,7 +149,7 @@ async function getplaylist() {
                 track_title = taylors;
             }
             let spotifysearch = encodeURI("track:" + track_title + " artist:Taylor Swift");
-            let searching = await fetch("https://api.spotify.com/v1/search?q=" + track_title + "&type=track&limit=1", {
+            let searching = await fetch("https://api.spotify.com/v1/search?q=" + spotifysearch + "&type=track&limit=1", {
                 method: 'GET',
                 headers: {
                     Authorization: 'Bearer ' + auth_token
@@ -197,22 +201,32 @@ async function taylorize() {
     document.getElementById("playlists_dropdown").style.display = "none";
     document.getElementById("stolen").style.display = "none";
     document.getElementById("taylorize").style.display = "none";
-    await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks", {
+    let playlistPost = await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks", {
         method: 'POST',
         headers: {
             Authorization: 'Bearer ' + auth_token
         },
         body : JSON.stringify(post_obj)
     });
-    document.getElementById("caption").style.color = "red";
-    document.getElementById("caption").style.innerText = "REMOVING Stolen Songs...";
-    await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks", {
-        method: "DELETE",
-        headers: {
-            Authorization: 'Bearer ' + auth_token,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(delete_obj)
-    });
+    if (playlistPost.status == 201) {
+        document.getElementById("caption").style.color = "red";
+        document.getElementById("caption").style.innerText = "REMOVING Stolen Songs...";
+        let playlistDelete = await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks", {
+            method: "DELETE",
+            headers: {
+                Authorization: 'Bearer ' + auth_token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(delete_obj)
+        });
+        // nested if statement to also verify playlistDelete
+        if (playlistDelete.status == 201) {
+            window.location.replace(origin + "?success=true");
+        } else {
+            window.location.replace(origin + "?playlist_error=" + playlistPost.status);
+        }
+    } else {
+        window.location.replace(origin + "?playlist_error=" + playlistPost.status);
+    }
     window.location.replace(origin + "?success=true");
 }
