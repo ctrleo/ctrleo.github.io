@@ -19,7 +19,9 @@ function getLoginURL() {
 };
 
 function maketaylors(title) {
-    if (title == "SuperStar") {
+    if (title == "Forever & Always - Piano Version") {
+        return "Forever & Always (Piano Version) (Taylor's Version)";
+    } else if (title == "SuperStar") {
         return "Superstar (Taylor's Version)";
     } else if (title == "I Knew You Were Trouble.") {
         return "I Knew You Were Trouble (Taylor's Version)";
