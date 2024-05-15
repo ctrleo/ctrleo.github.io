@@ -105,7 +105,6 @@ async function getplaylist() {
     document.getElementById("loading").style.display = "block";
     var select = document.getElementById('playlists_dropdown');
     var id = select.value;
-    console.log(`Searching playlist: ${select.label}; ID ${id}`);
     let playlist_tracks = await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks" + "?limit=50", {
         method: 'GET',
         headers: {
@@ -130,7 +129,6 @@ async function getplaylist() {
         var moreitems = newjson.items;
         for (let i = 0; i < moreitems.length; i++) {
             tracks.push(moreitems[i]);
-            console.log(`Tracks found: ${tracks}`);
         }
         more = newjson.next;
     }
@@ -148,11 +146,10 @@ async function getplaylist() {
             let parsed_search = await searching.json();
             let parsed_track = parsed_search.tracks.items[0];
             if (parsed_track.name.includes(track.name) || parsed_track.name.replaceAll("’", "'") == taylors) {
-                console.log(`DEBUG: ${taylors} found in ${parsed_track.name}`);
                 stolen_songs.push(track.uri);
                 taylors_versions.push(parsed_track.uri);
             } else {
-                console.log(`Song: ${taylors} not found, found ${parsed_track.name}`);
+                console.log(`Error: ${taylors} not found, found ${parsed_track.name}`);
             };
         };
     };
@@ -185,7 +182,6 @@ async function taylorize() {
     stolen_songs.forEach(uri => {
         delete_obj.tracks.push({ "uri": uri });
     });
-    console.log(taylors_versions);
     var id = document.getElementById("playlists_dropdown").value;
     document.getElementById("caption").style.color = "#69FFB4";
     document.getElementById("caption").innerText = "ADDING (Taylor's Versions)...";
