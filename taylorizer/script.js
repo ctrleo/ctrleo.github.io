@@ -20,9 +20,7 @@ function getLoginURL() {
 
 function maketaylors(title) {
     if (title == "Forever & Always - Piano Version") {
-        return "Forever and Always (Piano Version) (Taylor's Version)";
-    } else if (title == "Forever & Always") {
-        return "Forever and Always (Taylor's Version)";
+        return "Forever & Always (Piano Version) (Taylor's Version)";
     } else if (title == "SuperStar") {
         return "Superstar (Taylor's Version)";
     } else if (title == "I Knew You Were Trouble.") {
@@ -140,8 +138,14 @@ async function getplaylist() {
         let track = tracks[t].track;
         let taylors = maketaylors(track.name);
         if (stolen.includes(track.album.name)) {
-            let spotifysearch = encodeURI("track:" + taylors + " artist:Taylor Swift");
-            let searching = await fetch("https://api.spotify.com/v1/search?q=" + spotifysearch + "&type=track&limit=1", {
+            let track_title;
+            if (taylors == "Forever & Always (Piano Version) (Taylor's Version)" || taylors == "Forever & Always (Taylor's Version)") {
+                track_title = taylors.replace("&", "and");
+            } else {
+                track_title = taylors;
+            }
+            let spotifysearch = encodeURI("track:" + track_title + " artist:Taylor Swift");
+            let searching = await fetch("https://api.spotify.com/v1/search?q=" + track_title + "&type=track&limit=1", {
                 method: 'GET',
                 headers: {
                     Authorization: 'Bearer ' + auth_token
