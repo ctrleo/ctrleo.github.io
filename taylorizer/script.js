@@ -25,6 +25,16 @@ function maketaylors(title) {
         return "I Knew You Were Trouble (Taylor's Version)";
     } else if (title == "Treacherous - Original Demo Recording") {
         return "Treacherous (Taylor's Version)";
+    } else if (title == "Red - Original Demo Recording") {
+        return "Red (Taylor's Version)";
+    } else if (title == "State Of Grace - Acoustic") {
+        return "State Of Grace (Acoustic Version) (Taylor's Version)";
+    } else if (title == "Mine - POP Mix") {
+        return "Mine (Taylor's Version)";
+    } else if (title == "Back To December - Acoustic") {
+        return "Back To December (Taylor's Version)";
+    } else if (title == "Haunted - Acoustic Version") {
+        return "Haunted (Taylor's Version)";
     } else {
         return title.replaceAll("’", "'") + " (Taylor's Version)";
     };
