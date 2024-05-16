@@ -42,58 +42,57 @@ function maketaylors(title) {
     };
 };
 
-class song_dialogue {
-    constructor() { }
-    set(song_title, era) {
-        let color;
-        let label = document.getElementById("song_text");
-        switch(era.replaceAll("’", "'")) {
-            case "Taylor Swift" || "Taylor Swift (Big Machine Radio Release Special)":
-                color = "#a5c9a5";
-                break
-            case "Fearless" || "Fearless (Big Machine Radio Release Special)" || "Fearless (Platinum Edition)" || "Fearless (Taylor's Version)" || "Today Was A Fairytale":
-                color = "#efc180";
-                break
-            case "Speak Now" || "Speak Now (Big Machine Radio Release Special)" || "Speak Now (Deluxe Edition)" || "Speak Now (Deluxe Package)" || "Speak Now (Taylor's Version)":
-                color = "#c7a8cb";
-                break
-            case "Red" || "Red (Big Machine Radio Release Special)" || "Red (Deluxe)" || "Red (Taylor's Version)" || "Ronan":
-                color = "7a2e39";
-                break
-            case "1989" || "1989 (Big Machine Radio Release Special)" || "1989 (Deluxe)" || "1989 (Deluxe Edition)" || "1989 (Taylor's Version)" || "1989 (Taylor's Version) [Deluxe]":
-                color = "#b5e5f8";
-                break
-            case "reputation":
-                color = "#746f70";
-                break
-            case "Lover" || "The More Lover Chapter":
-                color = "#f7b0cc";
-                break
-            case "folklore" || "folklore (deluxe version)" || "folklore: the long pond studio sessions (from the Disney+ special) [deluxe edition]":
-                color = "#cdc9c1";
-                break
-            case "evermore" || "evermore (deluxe version)":
-                color = "#c6ac90";
-                break
-            case "Midnights" || "Midnights (3am Edition)" || "Midnights (The Til Dawn Edition)":
-                color = "#242e47";
-                break
-            case "THE TORTURED POETS DEPARTMENT" || "THE TORTURED POETS DEPARTMENT: THE ANTHOLOGY":
-                color = "#f8f8ff";
-                break
-            default:
-                color = "#333";
-                song_title += "!!!"
-                break
-        }
-        label
-            .style.display = "block"
-            .style.color = color
-            .innerText = song_title;
+function set_dialog(song_title, era) {
+    // SHORTHAND to set caption under loading bar for song which is being processed DO NOT USE IT FOR OTHER PURPOSES
+    let color;
+    let label = document.getElementById("song_text");
+    switch(era.replaceAll("’", "'")) {
+        case "Taylor Swift" || "Taylor Swift (Big Machine Radio Release Special)":
+            color = "#a5c9a5";
+            break
+        case "Fearless" || "Fearless (Big Machine Radio Release Special)" || "Fearless (Platinum Edition)" || "Fearless (Taylor's Version)" || "Today Was A Fairytale":
+            color = "#efc180";
+            break
+        case "Speak Now" || "Speak Now (Big Machine Radio Release Special)" || "Speak Now (Deluxe Edition)" || "Speak Now (Deluxe Package)" || "Speak Now (Taylor's Version)":
+            color = "#c7a8cb";
+            break
+        case "Red" || "Red (Big Machine Radio Release Special)" || "Red (Deluxe)" || "Red (Taylor's Version)" || "Ronan":
+            color = "7a2e39";
+            break
+        case "1989" || "1989 (Big Machine Radio Release Special)" || "1989 (Deluxe)" || "1989 (Deluxe Edition)" || "1989 (Taylor's Version)" || "1989 (Taylor's Version) [Deluxe]":
+            color = "#b5e5f8";
+            break
+        case "reputation":
+            color = "#746f70";
+            break
+        case "Lover" || "The More Lover Chapter":
+            color = "#f7b0cc";
+            break
+        case "folklore" || "folklore (deluxe version)" || "folklore: the long pond studio sessions (from the Disney+ special) [deluxe edition]":
+            color = "#cdc9c1";
+            break
+        case "evermore" || "evermore (deluxe version)":
+            color = "#c6ac90";
+            break
+        case "Midnights" || "Midnights (3am Edition)" || "Midnights (The Til Dawn Edition)":
+            color = "#242e47";
+            break
+        case "THE TORTURED POETS DEPARTMENT" || "THE TORTURED POETS DEPARTMENT: THE ANTHOLOGY":
+            color = "#f8f8ff";
+            break
+        default:
+            color = "#333";
+            song_title += "!!!";
+            break
     }
-    reset() {
-        document.getElementById("song_text").style.display = "none";
-    }
+    label
+        .style.display = "block"
+        .style.color = color
+        .innerText = song_title;
+}
+
+function reset_dialog() {
+    document.getElementById("song_text").style.display = "none";
 }
 
 async function main() {
@@ -158,7 +157,6 @@ function logout() {
 }
 
 async function getplaylist() {
-    let dialog = new song_dialogue;
     let stolen_songs = [];
     let taylors_versions = [];
     sessionStorage.clear();
@@ -197,7 +195,7 @@ async function getplaylist() {
         let track = tracks[t].track;
         let taylors = maketaylors(track.name);
         if (track.artists[0].name == "Taylor Swift") {
-            dialog.set(track.name, track.album.name);
+            set_dialog(track.name, track.album.name); // DO NOT USE FOR ANY OTHER PURPOSE THAN TO SUBTITLE SONG TITLES
         }
         if (stolen.includes(track.album.name)) {
             let track_title;
@@ -222,7 +220,7 @@ async function getplaylist() {
                 console.log(`Error: ${taylors} not found, found ${parsed_track.name}`);
             };
         };
-        dialog.reset();
+        reset_dialog(); // ONLY USE IN CONTEXT
     };
     sessionStorage.setItem("stolen_songs", stolen_songs);
     sessionStorage.setItem("taylors_versions", taylors_versions)
