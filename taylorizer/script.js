@@ -85,10 +85,9 @@ function set_dialog(song_title, era) {
             song_title += "!!!";
             break
     }
-    label
-        .style.display = "block"
-        .style.color = color
-        .innerText = song_title;
+    label.style.display = "block";
+    label.style.color = color;
+    label.innerText = song_title;
 }
 
 function reset_dialog() {
