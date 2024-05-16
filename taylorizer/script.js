@@ -43,6 +43,7 @@ function maketaylors(title) {
 };
 
 class song_dialogue {
+    constructor() { }
     set(song_title, era) {
         let color;
         let label = document.getElementById("song_text");
@@ -157,6 +158,7 @@ function logout() {
 }
 
 async function getplaylist() {
+    let dialog = new song_dialogue;
     let stolen_songs = [];
     let taylors_versions = [];
     sessionStorage.clear();
@@ -195,7 +197,7 @@ async function getplaylist() {
         let track = tracks[t].track;
         let taylors = maketaylors(track.name);
         if (track.artists[0].name == "Taylor Swift") {
-            song_dialogue.set(track.name, track.album.name);
+            dialog.set(track.name, track.album.name);
         }
         if (stolen.includes(track.album.name)) {
             let track_title;
@@ -220,7 +222,7 @@ async function getplaylist() {
                 console.log(`Error: ${taylors} not found, found ${parsed_track.name}`);
             };
         };
-        song_dialogue.reset();
+        dialog.reset();
     };
     sessionStorage.setItem("stolen_songs", stolen_songs);
     sessionStorage.setItem("taylors_versions", taylors_versions)
