@@ -104,6 +104,11 @@
     animation: spin 1s linear infinite;
 }
 
+#song_text {
+    font-family: "Lucida Console", "Courier New", monospace;
+    display: none;
+}
+
 #credit {
     color: 333;
     text-align: center;

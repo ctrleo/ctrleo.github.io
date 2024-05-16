@@ -42,6 +42,59 @@ function maketaylors(title) {
     };
 };
 
+class song_dialogue {
+    set(song_title, era) {
+        let color;
+        let label = document.getElementById("song_text");
+        switch(era) {
+            case "Taylor Swift":
+                color = "#a5c9a5";
+                break
+            case "Fearless":
+                color = "#efc180";
+                break
+            case "Speak Now":
+                color = "#c7a8cb";
+                break
+            case "Red":
+                color = "7a2e39";
+                break
+            case "1989":
+                color = "#b5e5f8";
+                break
+            case "reputation":
+                color = "#746f70";
+                break
+            case "Lover":
+                color = "#f7b0cc";
+                break
+            case "folklore":
+                color = "#cdc9c1";
+                break
+            case "evermore":
+                color = "#c6ac90";
+                break
+            case "Midnights":
+                color = "#242e47";
+                break
+            case "THE TORTURED POETS DEPARTMENT":
+                color = "#f8f8ff";
+                break
+            default:
+                color = "#333";
+                song_title += "!!!"
+                break
+        }
+        label
+            .style.display = "block"
+            .style.color = color
+            .innerText = song_title;
+    }
+    reset() {
+        document.getElementById("song_text").style.display = "none";
+    }
+}
+
 async function main() {
     document.getElementById("sign-in").href = getLoginURL();
     var select = document.getElementById('playlists_dropdown');
@@ -141,6 +194,9 @@ async function getplaylist() {
     for (let t = 0; t < tracks.length; t++) {
         let track = tracks[t].track;
         let taylors = maketaylors(track.name);
+        if (track.artists[0].name == "Taylor Swift") {
+            song_dialogue.set(track.name, track.album.name);
+        }
         if (stolen.includes(track.album.name)) {
             let track_title;
             if (taylors == "Forever & Always (Piano Version) (Taylor's Version)" || taylors == "Forever & Always (Taylor's Version)") {
@@ -164,6 +220,7 @@ async function getplaylist() {
                 console.log(`Error: ${taylors} not found, found ${parsed_track.name}`);
             };
         };
+        song_dialogue.reset();
     };
     sessionStorage.setItem("stolen_songs", stolen_songs);
     sessionStorage.setItem("taylors_versions", taylors_versions)
