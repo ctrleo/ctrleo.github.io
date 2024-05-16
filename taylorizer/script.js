@@ -46,38 +46,38 @@ class song_dialogue {
     set(song_title, era) {
         let color;
         let label = document.getElementById("song_text");
-        switch(era) {
-            case "Taylor Swift":
+        switch(era.replaceAll("’", "'")) {
+            case "Taylor Swift" || "Taylor Swift (Big Machine Radio Release Special)":
                 color = "#a5c9a5";
                 break
-            case "Fearless":
+            case "Fearless" || "Fearless (Big Machine Radio Release Special)" || "Fearless (Platinum Edition)" || "Fearless (Taylor's Version)" || "Today Was A Fairytale":
                 color = "#efc180";
                 break
-            case "Speak Now":
+            case "Speak Now" || "Speak Now (Big Machine Radio Release Special)" || "Speak Now (Deluxe Edition)" || "Speak Now (Deluxe Package)" || "Speak Now (Taylor's Version)":
                 color = "#c7a8cb";
                 break
-            case "Red":
+            case "Red" || "Red (Big Machine Radio Release Special)" || "Red (Deluxe)" || "Red (Taylor's Version)" || "Ronan":
                 color = "7a2e39";
                 break
-            case "1989":
+            case "1989" || "1989 (Big Machine Radio Release Special)" || "1989 (Deluxe)" || "1989 (Deluxe Edition)" || "1989 (Taylor's Version)" || "1989 (Taylor's Version) [Deluxe]":
                 color = "#b5e5f8";
                 break
             case "reputation":
                 color = "#746f70";
                 break
-            case "Lover":
+            case "Lover" || "The More Lover Chapter":
                 color = "#f7b0cc";
                 break
-            case "folklore":
+            case "folklore" || "folklore (deluxe version)" || "folklore: the long pond studio sessions (from the Disney+ special) [deluxe edition]":
                 color = "#cdc9c1";
                 break
-            case "evermore":
+            case "evermore" || "evermore (deluxe version)":
                 color = "#c6ac90";
                 break
-            case "Midnights":
+            case "Midnights" || "Midnights (3am Edition)" || "Midnights (The Til Dawn Edition)":
                 color = "#242e47";
                 break
-            case "THE TORTURED POETS DEPARTMENT":
+            case "THE TORTURED POETS DEPARTMENT" || "THE TORTURED POETS DEPARTMENT: THE ANTHOLOGY":
                 color = "#f8f8ff";
                 break
             default:
