@@ -89,6 +89,8 @@
 
 #progress {
     display: none;
+    margin: 0 auto;
+    text-align: center;
 }
 
 #taylorize {
