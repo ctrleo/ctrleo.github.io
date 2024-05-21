@@ -219,7 +219,7 @@ async function taylorize() {
         },
         body : JSON.stringify(post_obj)
     });
-    if (playlistPost.status == 201) {
+    if (playlistPost.status == 201 || playlistPost.status == 200) {
         document.getElementById("caption").style.color = "red";
         document.getElementById("caption").style.innerText = "REMOVING Stolen Songs...";
         let playlistDelete = await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks", {
@@ -231,7 +231,7 @@ async function taylorize() {
             body: JSON.stringify(delete_obj)
         });
         // nested if statement to also verify playlistDelete
-        if (playlistDelete.status == 201) {
+        if (playlistDelete.status == 201 || playlistDelete.status == 200) {
             window.location.replace(origin + "?success=true");
         } else {
             window.location.replace(origin + "?playlist_error=" + playlistPost.status);
