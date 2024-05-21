@@ -108,9 +108,9 @@ function logout() {
 async function getplaylist() {
     let stolen_songs = [];
     let taylors_versions = [];
+    let bar = document.getElementById("progress");
     sessionStorage.clear();
     document.getElementById("stolen").style.display = "none";
-    document.getElementById("loading").style.display = "block";
     var select = document.getElementById('playlists_dropdown');
     var id = select.value;
     let playlist_tracks = await fetch("https://api.spotify.com/v1/playlists/" + id + "/tracks" + "?limit=50", {
@@ -140,7 +140,10 @@ async function getplaylist() {
         }
         more = newjson.next;
     }
+    bar.max = tracks.length;
+    bar.style.display = "block";
     for (let t = 0; t < tracks.length; t++) {
+        bar.value = t;
         let track = tracks[t].track;
         let taylors = maketaylors(track.name);
         if (stolen.includes(track.album.name)) {
@@ -169,7 +172,7 @@ async function getplaylist() {
     };
     sessionStorage.setItem("stolen_songs", stolen_songs);
     sessionStorage.setItem("taylors_versions", taylors_versions)
-    document.getElementById("loading").style.display = "none";
+    bar.style.display = "none";
     document.getElementById("stolen").innerText = stolen_songs.length + " stolen songs found";
     document.getElementById("stolen").style.display = "block";
     if (stolen_songs.length > 0) {

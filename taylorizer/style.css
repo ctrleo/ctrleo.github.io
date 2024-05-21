@@ -87,6 +87,10 @@
     100% { transform: rotate(360deg); }
 }
 
+#progress {
+    display: none;
+}
+
 #taylorize {
     display: none;
     margin: 0 auto;
