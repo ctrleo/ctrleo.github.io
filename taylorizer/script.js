@@ -19,6 +19,9 @@ function getLoginURL() {
 };
 
 function maketaylors(title) {
+    if (title.has("Voice Memo")) {
+        return "SKIP";
+    }
     if (title == "Forever & Always - Piano Version") {
         return "Forever & Always (Piano Version) (Taylor's Version)";
     } else if (title == "SuperStar") {
@@ -146,6 +149,9 @@ async function getplaylist() {
         bar.value = t;
         let track = tracks[t].track;
         let taylors = maketaylors(track.name);
+        if (taylors == "SKIP") {
+            continue;
+        }
         if (stolen.includes(track.album.name)) {
             let track_title;
             if (taylors == "Forever & Always (Piano Version) (Taylor's Version)" || taylors == "Forever & Always (Taylor's Version)") {
