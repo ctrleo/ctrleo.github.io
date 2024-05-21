@@ -19,7 +19,7 @@ function getLoginURL() {
 };
 
 function maketaylors(title) {
-    if (title.has("Voice Memo")) {
+    if (title.includes("Voice Memo")) {
         return "SKIP";
     }
     if (title == "Forever & Always - Piano Version") {
