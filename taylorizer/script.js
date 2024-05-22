@@ -104,7 +104,7 @@ async function main() {
 };
 
 function logout() {
-    localStorage.removeItem("access_token");
+    localStorage.clear();
     window.location.replace(origin);
 }
 
