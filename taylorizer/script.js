@@ -111,6 +111,7 @@ function logout() {
 async function getplaylist() {
     let stolen_songs = [];
     let taylors_versions = [];
+    let used_uris;
     let bar = document.getElementById("progress");
     sessionStorage.clear();
     document.getElementById("stolen").style.display = "none";
@@ -174,11 +175,22 @@ async function getplaylist() {
             } else {
                 console.log(`Error: ${taylors} not found, found ${parsed_track.name}`);
             };
+        } else if (track.name.replaceAll("’", "'").has("Taylor's Version")) {
+            used_uris.push(track.uri);
+        }
+    };
+    bar.style.display = "none";
+    document.getElementById("loading").style.display = "block";
+    for (let i = 0; i < taylors_versions.length; i++) {
+        let taylors_track = taylors_versions[i];
+        if (used_uris.includes(taylors_track)) {
+            console.log("DEBUG: Removed duplicate track")
+            taylors_versions.splice(i, 1);
         };
     };
     sessionStorage.setItem("stolen_songs", stolen_songs);
-    sessionStorage.setItem("taylors_versions", taylors_versions)
-    bar.style.display = "none";
+    sessionStorage.setItem("taylors_versions", taylors_versions);
+    document.getElementById("loading").style.display = "none";
     document.getElementById("stolen").innerText = stolen_songs.length + " stolen songs found";
     document.getElementById("stolen").style.display = "block";
     if (stolen_songs.length > 0) {
