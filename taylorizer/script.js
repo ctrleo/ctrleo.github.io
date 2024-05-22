@@ -3,7 +3,6 @@ var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
 var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless Platinum Edition", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Edition)", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe)", "1989 (Deluxe Edition)", "1989 (Big Machine Radio Release Special)"];
 var auth_token = localStorage.getItem("access_token");
-var refresh_token = localStorage.getItem("refresh_token");
 var redirect_uri = "https://ctrleo.github.io/taylorizer";
 var client_id = "d128390f0da0402896d4d02cdfbf2e26";
 var scope = "playlist-read-private playlist-modify-private playlist-modify-public"
@@ -50,33 +49,10 @@ async function main() {
     document.getElementById("sign-in").href = getLoginURL();
     var select = document.getElementById('playlists_dropdown');
     if (params.has("auth_error")) {
-        if (refresh_token !== null && refresh_token !== undefined) {
-            document.getElementById("loading").style.display = "block";
-            var refresh_body = await fetch("https://accounts.spotify.com/api/token", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({
-                    grant_type: 'refresh_token',
-                    refresh_token: refresh_token
-                })
-            })
-            var refreshjson = await refresh_body.json();
-            document.getElementById("loading").style.display = "none";
-            if (refresh_token.status == 200) {
-                localStorage.setItem("access_token", refreshjson.access_token);
-                localStorage.setItem("refresh_token", refreshjson.refresh_token);
-            } else {
-                localStorage.clear();
-                window.location.replace(origin + "?auth_error=true");
-            };
-        } else {
-            document.getElementById("caption").style.color = "red";
-            document.getElementById("caption").innerText = "Auth error occured :/ please try again!";
-            if (localStorage.getItem("access_token")) {
-                localStorage.removeItem("access_token");
-            }
+        document.getElementById("caption").style.color = "red";
+        document.getElementById("caption").innerText = "Auth error occured :/ please try again!";
+        if (localStorage.getItem("access_token")) {
+            localStorage.removeItem("access_token");
         }
     };
     if (params.has("playlist_error")) {
@@ -85,16 +61,14 @@ async function main() {
     }
     if (params.has("code")) {
         var token;
-        var refresh;
         document.getElementById("sign-in").style.display = "none";
         document.getElementById("loading").style.display = "inline-block";
         fetch(backend + "?code=" + params.get("code"))
             .then(response => response.json())
-            .then((json) => {token = json.access_token; refresh = json.refresh_token})
+            .then((json) => {token = json.access_token})
             .catch(function() {window.location.replace(origin + "?auth_error=true")})
             .finally(function() {
                 localStorage.setItem("access_token", token);
-                localStorage.setItem("refresh_token", refresh);
                 window.location.replace(origin);
             });
     };
@@ -130,7 +104,7 @@ async function main() {
 };
 
 function logout() {
-    localStorage.clear();
+    localStorage.removeItem("access_token");
     window.location.replace(origin);
 }
 
