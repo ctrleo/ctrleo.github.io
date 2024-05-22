@@ -71,11 +71,12 @@ async function main() {
                 localStorage.clear();
                 window.location.replace(origin + "?auth_error=true");
             };
-        }
-        document.getElementById("caption").style.color = "red";
-        document.getElementById("caption").innerText = "Auth error occured :/ please try again!";
-        if (localStorage.getItem("access_token")) {
-            localStorage.removeItem("access_token");
+        } else {
+            document.getElementById("caption").style.color = "red";
+            document.getElementById("caption").innerText = "Auth error occured :/ please try again!";
+            if (localStorage.getItem("access_token")) {
+                localStorage.removeItem("access_token");
+            }
         }
     };
     if (params.has("playlist_error")) {
@@ -129,7 +130,7 @@ async function main() {
 };
 
 function logout() {
-    localStorage.removeItem("access_token");
+    localStorage.clear;
     window.location.replace(origin);
 }
 
