@@ -175,7 +175,7 @@ async function getplaylist() {
             } else {
                 console.log(`Error: ${taylors} not found, found ${parsed_track.name}`);
             };
-        } else if (track.name.replaceAll("’", "'").has("Taylor's Version")) {
+        } else if (track.name.replaceAll("’", "'").includes("Taylor's Version")) {
             used_uris.push(track.uri);
         }
     };
