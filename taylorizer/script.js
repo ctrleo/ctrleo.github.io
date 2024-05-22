@@ -103,34 +103,30 @@ async function main() {
         document.getElementById("caption").innerText = "DONE!";
     }
     if ((auth_token !== null) && (auth_token !== undefined)) {
-        if (refresh_token !== null && refresh_token !== undefined) {
+        document.getElementById("sign-in").style.display = "none";
+        document.getElementById("loading").style.display = "block";
+        document.getElementById("sign-out").style.display = "block";
+        var getplaylists = await fetch("https://api.spotify.com/v1/me/playlists", {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + auth_token
+            }
+        });
+        if (getplaylists.status !== 200) {
             window.location.replace(origin + "?auth_error=true");
         } else {
-            document.getElementById("sign-in").style.display = "none";
-            document.getElementById("loading").style.display = "block";
-            document.getElementById("sign-out").style.display = "block";
-            var getplaylists = await fetch("https://api.spotify.com/v1/me/playlists", {
-                method: 'GET',
-                headers: {
-                    Authorization: 'Bearer ' + auth_token
-                }
-            });
-            if (getplaylists.status !== 200) {
-                window.location.replace(origin + "?auth_error=true");
-            } else {
-                var playlistsjson = await getplaylists.json();
-                var playlists = playlistsjson.items;
-                for (let i = 0; i < playlists.length; i++) {
-                    let playlist_name = playlists[i].name;
-                    let playlist_id = playlists[i].id;
-                    let option = new Option(playlist_name, playlist_id);
-                    select.add(option);
-                };
-                select.style.display = "inline-block";
-                document.getElementById("loading").style.display = "none";
+            var playlistsjson = await getplaylists.json();
+            var playlists = playlistsjson.items;
+            for (let i = 0; i < playlists.length; i++) {
+                let playlist_name = playlists[i].name;
+                let playlist_id = playlists[i].id;
+                let option = new Option(playlist_name, playlist_id);
+                select.add(option);
             };
+            select.style.display = "inline-block";
+            document.getElementById("loading").style.display = "none";
         };
-    }
+    };
 };
 
 function logout() {
@@ -281,6 +277,6 @@ async function taylorize() {
         }
     } else {
         window.location.replace(origin + "?playlist_error=" + playlistPost.status);
-    };
+    }
     window.location.replace(origin + "?success=true");
 }
