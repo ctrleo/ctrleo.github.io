@@ -26,9 +26,11 @@
     font-size: 20px;
 }
 
-#dev_note {
+.dev_note {
     color: #69ffb4;
+    font-family: "Arial Mono";
 }
+
 
 #playlists_dropdown {
     display: none;
