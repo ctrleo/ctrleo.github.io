@@ -51,6 +51,7 @@ async function main() {
     var select = document.getElementById('playlists_dropdown');
     if (params.has("auth_error")) {
         if (refresh_token !== null && refresh_token !== undefined) {
+            document.getElementById("loading").style.display = "block";
             var refresh_body = await fetch("https://accounts.spotify.com/api/token", {
                 method: 'POST',
                 headers: {
@@ -62,6 +63,7 @@ async function main() {
                 })
             })
             var refreshjson = await refresh_body.json();
+            document.getElementById("loading").style.display = "none";
             if (refresh_token.status == 200) {
                 localStorage.setItem("access_token", refreshjson.access_token);
                 localStorage.setItem("refresh_token", refreshjson.refresh_token);
