@@ -130,7 +130,7 @@ async function main() {
 };
 
 function logout() {
-    localStorage.clear;
+    localStorage.clear();
     window.location.replace(origin);
 }
 
