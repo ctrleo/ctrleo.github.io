@@ -111,7 +111,7 @@ function logout() {
 async function getplaylist() {
     let stolen_songs = [];
     let taylors_versions = [];
-    let used_uris;
+    let used_uris = [];
     let bar = document.getElementById("progress");
     sessionStorage.clear();
     document.getElementById("stolen").style.display = "none";
@@ -182,6 +182,7 @@ async function getplaylist() {
     bar.style.display = "none";
     document.getElementById("loading").style.display = "block";
     for (let i = 0; i < taylors_versions.length; i++) {
+        if (used_uris.length < 1) { break; };
         let taylors_track = taylors_versions[i];
         if (used_uris.includes(taylors_track)) {
             console.log("DEBUG: Removed duplicate track")
