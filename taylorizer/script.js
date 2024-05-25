@@ -12,8 +12,7 @@ function getLoginURL() {
         response_type: 'code',
         client_id: client_id,
         redirect_uri: redirect_uri,
-        scope: scope,
-        show_dialog: true
+        scope: scope
     });
     return "https://accounts.spotify.com/authorize?" + login_url_params.toString();
 };
