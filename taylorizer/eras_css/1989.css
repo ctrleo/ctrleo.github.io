@@ -1,0 +1,165 @@
+* {
+    font-family:  sans-serif;
+    margin: 0px;
+}
+
+@font-face {
+    font-family: "Arial Mono";
+    src: url("/fonts/ArialMonoRegular.TTF");
+} 
+
+.permanent-marker-regular {
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+#eras {
+    text-align: center;
+    background-color: #88afcd;
+    padding-top: 5px;
+}
+
+#eras button {
+    margin-left: 1vw;
+    margin-right: 1vw;
+    padding: 0.5vw 3vw;
+}
+
+body {
+    background-color: #a17e66;
+}
+
+#main {
+    text-align: center;
+    color: #ffffff;
+    background-color: #88afcd;
+    padding-top: 120px;
+    padding-bottom: 50px;
+}
+
+#main h1 {
+    font-size: 15vw;
+}
+
+#notes {
+    display: block;
+    padding-bottom: 35px;
+    font-size: 20px;
+}
+
+#caption {
+    color: #dad59c;
+    font-family: 'Permanent Marker';
+}
+
+.dev_note {
+    color: #69ffb4;
+}
+
+
+#playlists_dropdown {
+    display: none;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#stolen {
+    display: none;
+    color: aqua;
+    font-size: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#tv {
+    display: none;
+    color: greenyellow;
+}
+
+#sign-in {
+    background-color: lime;
+    color: black;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+#sign-out {
+    background-color: white;
+    color: black;
+    display: none;
+    margin: auto;
+    margin-top: 15px;
+}
+
+#socials {
+    text-align: center;
+}
+
+#loading {
+    text-align: center;
+    display: none;
+    border: 16px solid mintcream;
+    border-top: 16px solid aqua;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#progress {
+    display: none;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#taylorize {
+    display: none;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#taylorizing {
+    text-align: center;
+    display: none;
+    border: 16px solid whitesmoke;
+    border-top: 16px solid red;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+#info {
+    padding-top: 30px;
+    background-color: #a17e66;
+}
+
+#info * {
+    color: #b5c7d6;
+}
+
+#info h1 {
+    font-family: 'Permanent Marker';
+}
+
+#credit {
+    color: 333;
+    text-align: center;
+    font-size: 13px;
+    font-family: "Arial Mono";
+}
+
+#socials {
+    background-color: #a17e66;
+    color: #b5c7d6;
+}
