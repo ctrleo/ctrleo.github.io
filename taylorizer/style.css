@@ -8,6 +8,16 @@
     src: url("../fonts/ArialMonoRegular.TTF");
 }
 
+#eras {
+    text-align: center;
+    background-color: #ff69b4;
+}
+
+#eras button {
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+
 #main {
     text-align: center;
     color: white;
