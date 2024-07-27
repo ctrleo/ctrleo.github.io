@@ -5,12 +5,29 @@
         <title>Taylorizer</title>
         <meta name="description" content="Swap your stolen songs for (Taylor's Version)!">
         <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-        <link rel="stylesheet" href="style.css">
+        <link id="css-style" rel="stylesheet" href="default.css">
         <script type="text/javascript" src="script.js"></script>
+        <!-- GOOGLE FONTS -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=Permanent+Marker&family=Style+Script&display=swap" rel="stylesheet">
         <!-- ADSENSE BELOW -->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9917371176541916" crossorigin="anonymous"></script>
     </head>
     <body onload="main()">
+        <div id="eras">
+            <button id="debut" style="background-color: #a5c9a5;" onclick="set_style('debut')"></button>
+            <button id="fearless" style="background-color: #efc180;" onclick="set_style('fearless')"></button>
+            <button id="speaknow" style="background-color: #db3cf0;" onclick="set_style('speaknow')"></button>
+            <button id="red" style="background-color: #fd0a0a;" onclick="set_style('red')"></button>
+            <button id="1989" style="background-color: #b5e5f8;" onclick="set_style('1989')"></button>
+            <button id="rep"style="background-color: #746f70;" onclick="set_style('rep')"></button>
+            <button id="lover" style="background-color: #ff69b4;" onclick="set_style('lover')"></button>
+            <button id="folklore" style="background-color: #d4bdbd;" onclick="set_style('folklore')"></button>
+            <button id="evermore" style="background-color: #c5ac90;" onclick="set_style('evermore')"></button>
+            <button id="midnights" style="background-color: #242e47;" onclick="set_style('midnights')"></button>
+            <button id="ttpd" style="background-color: #ffffff;" onclick="set_style('ttpd')"></button>
+        </div>
         <div id="main">
             <h1>TAYLORIZER</h1>
             <div id="notes">
@@ -30,19 +47,21 @@
                 <input type="button" id="sign-out" value="SIGN OUT" onclick="logout()">
             </div>
         </div>
-        <h1>What is this???</h1>
-        <p>This is a really cool web app I made to remove the old stolen songs from playlists and put in (Taylor's Version)!</p>
-        <h1>Why'd you make it</h1>
-        <p>I made it so that I could practice making websites, using Javascript, making HTTP requests to APIs, and making my own backend on a Raspberry Pi! (later transferred over to an aws lambda instance droplet)</p>
-        <h1>Who made this?</h1>
-        <p>This website was made by Leo K! Socials are linked below XD</p>
+        <div id="info">
+            <h1>What is this???</h1>
+            <p>This is a really cool web app I made to remove the old stolen songs from playlists and put in (Taylor's Version)!</p>
+            <h1>Why'd you make it</h1>
+            <p>I made it so that I could practice making websites, using Javascript, making HTTP requests to APIs, and making my own backend on a Raspberry Pi! (later transferred over to an aws lambda instance)</p>
+            <h1>Who made this?</h1>
+            <p>This website was made by Leo K! Socials are linked below XD</p>
+        </div>
         <div id="socials">
             <a href="https://discord.com/users/1119310629161934969"><img src="/images/icons8-discord-50.png" alt="Discord Link"></a>
             <a href="https://github.com/ctrleo/"><img src="/images/icons8-github-50.png" alt="Github"></a>
             <a href="mailto:leokeene@icloud.com?subject=Hey Leo!"><img src="/images/icons8-mail-50.png" alt="Email"></a>
             <a href="https://www.tiktok.com/@lmaoooitsleo"><img src="/images/icons8-tiktok-50.png" alt="TikTok"></a>
+            <p id="credit">Icons by <a target="_blank" href="https://icons8.com">Icons8</a></p>
+            <p id="policy">Read our <a target="_blank" href="https://ctrleo.github.io/PrivacyPolicy.htm">Privacy Policy</a> here!</p>
         </div>
-        <p id="credit">Icons by <a target="_blank" href="https://icons8.com">Icons8</a></p>
-        <p id="policy">Read our <a target="_blank" href="https://ctrleo.github.io/PrivacyPolicy.htm">Privacy Policy</a> here!</p>
     </body>
 </html>

@@ -5,14 +5,30 @@
 
 @font-face {
     font-family: "Arial Mono";
-    src: url("../fonts/ArialMonoRegular.TTF");
+    src: url("/fonts/ArialMonoRegular.TTF");
+} 
+
+#eras {
+    text-align: center;
+    background-color: #a10d0d;
+    padding-top: 5px;
+}
+
+#eras button {
+    margin-left: 1vw;
+    margin-right: 1vw;
+    padding: 0.5vw 3vw;
+}
+
+body {
+    background-color: #31150a;
 }
 
 #main {
     text-align: center;
-    color: white;
-    background-color: #ff69b4;
-    padding-top: 200px;
+    color: #ffffff;
+    background-color: #a10d0d;
+    padding-top: 120px;
     padding-bottom: 50px;
 }
 
@@ -24,6 +40,10 @@
     display: block;
     padding-bottom: 35px;
     font-size: 20px;
+}
+
+#caption {
+    color: #ecd8c6;
 }
 
 .dev_note {
@@ -111,9 +131,23 @@
     animation: spin 1s linear infinite;
 }
 
+#info {
+    padding-top: 30px;
+    background-color: #31150a;;
+}
+
+#info h1, #info p {
+    color: #baa28c;
+}
+
 #credit {
     color: 333;
     text-align: center;
     font-size: 13px;
     font-family: "Arial Mono";
+}
+
+#socials {
+    background-color: #31150a;
+    color: #baa28c;
 }
