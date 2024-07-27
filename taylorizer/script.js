@@ -107,6 +107,10 @@ function logout() {
     window.location.replace(origin);
 }
 
+function set_style(era) {
+    document.getElementById("css-style").href = `/taylorizer/eras_css/${era}.css`;
+}
+
 async function getplaylist() {
     let stolen_songs = [];
     let taylors_versions = [];
