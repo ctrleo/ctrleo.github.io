@@ -3,6 +3,7 @@ var params = new URLSearchParams(window.location.search);
 var origin = window.location.origin + "/taylorizer";
 var stolen = ["Fearless (International Version)", "Fearless (Platinum Edition)", "Fearless Platinum Edition", "Fearless (Big Machine Radio Release Special)", "Speak Now", "Speak Now (Deluxe Edition)", "Speak Now (Deluxe Package)", "Speak Now (Big Machine Radio Release Special)", "Today Was A Fairytale", "Red (Deluxe Edition)", "Red (Big Machine Radio Release Special)", "Ronan", "1989", "1989 (Deluxe)", "1989 (Deluxe Edition)", "1989 (Big Machine Radio Release Special)"];
 var auth_token = localStorage.getItem("access_token");
+var era = localStorage.getItem("era");
 var redirect_uri = "https://ctrleo.github.io/taylorizer";
 var client_id = "d128390f0da0402896d4d02cdfbf2e26";
 var scope = "playlist-read-private playlist-modify-private playlist-modify-public"
@@ -45,6 +46,9 @@ function maketaylors(title) {
 };
 
 async function main() {
+    if ((era !== null) && (era !== undefined)) {
+        document.getElementById("css-style").href = `/taylorizer/eras_css/${era}.css`
+    };
     document.getElementById("sign-in").href = getLoginURL();
     var select = document.getElementById('playlists_dropdown');
     if (params.has("auth_error")) {
@@ -66,7 +70,7 @@ async function main() {
             .then(response => response.json())
             .then((json) => {token = json.access_token})
             .catch(function() {window.location.replace(origin + "?auth_error=true")})
-            .finally(function() {
+            .finally(function() {origin
                 localStorage.setItem("access_token", token);
                 window.location.replace(origin);
             });
@@ -107,8 +111,9 @@ function logout() {
     window.location.replace(origin);
 }
 
-function set_style(era) {
-    document.getElementById("css-style").href = `/taylorizer/eras_css/${era}.css`;
+function set_style(select_era) {
+    localStorage.setItem("era", select_era);
+    document.getElementById("css-style").href = `/taylorizer/eras_css/${select_era}.css`;
 }
 
 async function getplaylist() {
