@@ -18,13 +18,16 @@ function getLoginURL() {
     return "https://accounts.spotify.com/authorize?" + login_url_params.toString();
 };
 
-function maketaylors(title) {
+function maketaylors(title, uniform) {
+    // special cases (bypasses spotify search)
     if (title.includes("Voice Memo")) {
         return "SKIP";
+    } else if (title == "Forever & Always") {
+        return uniform;
+    } else if (title == "Forever & Always - Piano Version") {
+        return "p" + uniform;
     }
-    if (title == "Forever & Always - Piano Version") {
-        return "Forever & Always (Piano Version) (Taylor's Version)";
-    } else if (title == "SuperStar") {
+    if (title == "SuperStar") {
         return "Superstar (Taylor's Version)";
     } else if (title == "I Knew You Were Trouble.") {
         return "I Knew You Were Trouble (Taylor's Version)";
@@ -157,18 +160,22 @@ async function getplaylist() {
     for (let t = 0; t < tracks.length; t++) {
         bar.value = t;
         let track = tracks[t].track;
-        let taylors = maketaylors(track.name);
+        let taylors = maketaylors(track.name, track.uri);
         if (taylors == "SKIP") {
             continue;
-        }
-        if (stolen.includes(track.album.name)) {
-            let track_title;
-            if (taylors == "Forever & Always (Piano Version) (Taylor's Version)" || taylors == "Forever & Always (Taylor's Version)") {
-                track_title = taylors.replace("&", "and");
+        } else if (taylors.includes("spotify")) {
+            if (taylors[0] == "p") {
+                taylors.replace("p", "");
+                stolen_songs.push(taylors);
+                taylors_versions.push("spotify:track:01QdEx6kFr78ZejhQtWR5m");
             } else {
-                track_title = taylors;
-            }
-            let spotifysearch = encodeURI("track:" + track_title + " artist:Taylor Swift");
+                stolen_songs.push(taylors);
+                taylors_versions.push("spotify:track:1msEuwSBneBKpVCZQcFTsU");
+            };
+            continue;
+        };
+        if (stolen.includes(track.album.name)) {
+            let spotifysearch = encodeURI("track:" + taylors + " artist:Taylor Swift");
             let searching = await fetch("https://api.spotify.com/v1/search?q=" + spotifysearch + "&type=track&limit=1", {
                 method: 'GET',
                 headers: {
